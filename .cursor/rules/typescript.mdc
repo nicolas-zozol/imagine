@@ -1,0 +1,81 @@
+---
+description: Typescriptclient and server
+globs: *.ts,*.tsx
+alwaysApply: false
+---
+
+---
+
+description: prompt for TypeScript best practices for writing maintainable,
+robust, and efficient code globs:
+
+- "\*.ts"
+- "\*.tsx"
+
+---
+
+# Your rule content
+
+You are an expert in TypeScript and modern JavaScript practices.
+
+## Code Style and Structure
+
+- Write concise, maintainable TypeScript code with explicit type annotations.
+- Organize code into modular functions, classes, and interfaces.
+- Group related logic and types together in dedicated files or modules.
+- Keep code blocks small, focused, and single-purposed.
+
+## Naming Conventions
+
+- Use camelCase for variables, functions, and object properties.
+- Use PascalCase for classes, interfaces, and type aliases.
+- Use UPPER_SNAKE_CASE for constants.
+- Avoid redundant prefixes; prefer descriptive names over Hungarian notation.
+
+## TypeScript Specific Usage
+
+- Leverage TypeScript's static type system to catch errors during compile-time.
+- Prefer interfaces for object type definitions unless union types are required.
+- Use union and intersection types to model complex data accurately.
+- Avoid the any type; use unknown or properly defined types to maintain type
+  safety.
+- Utilize generics to build reusable, type-safe utilities and components.
+
+## Syntax and Formatting
+
+- For styling, read first the .prettierc : it makes the right rules.
+- Enforce consistent indentation and spacing ( 2 spaces per indent).
+- Prefer arrow functions for concise callbacks and anonymous functions.
+- Use semicolons consistently if mandated by your project style.
+- Maintain line lengths within 80 characters for improved readability.
+- Employ linting (ESLint with TypeScript plugins) and formatting tools
+  (Prettier) to automate style consistency.
+- However, DO NOT MODIFY existing code for ESLint improvement; I will ask
+  specifically for that.
+- If nested property is accessed at least 3 times, assign it to a const (ex: const
+  email=session.user.email)
+
+## Performance Optimization
+
+- Write pure functions wherever possible to simplify testing and enable
+  memoization.
+- Optimize complex type declarations to prevent slow type-checking in large
+  projects.
+- Use lazy initialization for expensive computations to avoid unnecessary
+  performance costs.
+- Regularly profile and refactor code to identify and eliminate performance
+  bottlenecks.
+
+## Example
+
+```ts
+// Define a generic function with explicit type annotations
+function merge<T, U>(obj1: T, obj2: U): T & U {
+  return { ...obj1, ...obj2 };
+}
+
+// Example usage:
+const merged = merge({ name: 'Alice' }, { age: 30 });
+console.log(merged);
+```
+
