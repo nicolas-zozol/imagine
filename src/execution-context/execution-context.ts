@@ -1,3 +1,5 @@
+import {Serializable} from "../utils/loggable.js";
+
 /**
  * ExecutionContext represents the shared state and metadata between different tools
  * in the PuppetAI system. It serves as a central data store for:
@@ -22,9 +24,9 @@ export interface ExecutionContext {
     history: ActionLog[];
     errors: string[];
     warnings: string[];
-    [key: string]: any; // extra info
+    extra: Serializable; // extra info
   };
-  [key: string]: any; // for tool-specific namespaces (e.g. context.puppet)
+  extra: Serializable; // for tool-specific namespaces (e.g. context.puppet)
 }
 
 /**
@@ -66,8 +68,8 @@ export interface ExecutionContext {
  */
 export interface ActionLog {
   action: string;
-  selector?: string;
   value?: any;
   timestamp: string;
   error?: string;
+  extra?: Serializable;
 }
