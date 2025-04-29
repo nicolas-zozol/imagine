@@ -25,7 +25,7 @@ export const config: Config = {
         },
         suggestions: {
             container: 'ul[role="listbox"]',
-            items: 'ul[role="listbox"] li'
+            items: 'form[action="/search"] li div[role="option"]'
         }
     },
     delays: {

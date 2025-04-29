@@ -76,6 +76,7 @@ export class SearchHandler {
         config.selectors.searchInput,
       );
       if (!searchInput) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Search input not found');
       }
 
@@ -98,7 +99,7 @@ export class SearchHandler {
       const suggestions = await this.page.evaluate((selector) => {
         const elements = document.querySelectorAll(selector);
         return Array.from(elements)
-          .map((el) => el.textContent || '')
+            .map((el) => el.getAttribute('aria-label') || '')
           .filter(Boolean);
       }, config.selectors.suggestions.items);
 

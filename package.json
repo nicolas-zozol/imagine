@@ -10,7 +10,7 @@
     "clean": "rm -rf dist",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "watch": "tsc -p . --watch",
-    "haiku": "vite-node src/script/run-script.ts",
+    "script": "vite-node src/script/run-script.ts src/script/search-google.md",
     "puppets": "vite-node src/puppets/index.ts search haiku"
   },
   "dependencies": {

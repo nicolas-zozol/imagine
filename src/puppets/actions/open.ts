@@ -1,5 +1,5 @@
 import { BaseAction } from './base';
-import { ActionResult, ActionOptions, ActionConfig } from '../types/actions';
+import {  ActionOptions, ActionConfig } from '../types/actions';
 import { BrowserManager } from '../browser/index.js';
 
 const OPEN_CONFIG: ActionConfig = {
@@ -33,8 +33,6 @@ export class OpenAction extends BaseAction {
         success: false,
         message: `Error opening ${url}: ${error instanceof Error ? error.message : 'Unknown error'}`,
       });
-    } finally {
-      await this.cleanup();
     }
   }
 }

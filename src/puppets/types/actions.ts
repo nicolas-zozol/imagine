@@ -1,4 +1,4 @@
-export type Action = 'search' | 'open';
+export type Action = 'search' | 'open' | 'click';
 
 export interface ActionHandler {
     execute(params: string[], options: ActionOptions): Promise<void>;
