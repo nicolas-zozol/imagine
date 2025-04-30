@@ -25,7 +25,7 @@ export const config: Config = {
         },
         suggestions: {
             container: 'ul[role="listbox"]',
-            items: 'ul[role="listbox"] li'
+            items: 'ul[role="listbox"] li div[role=presentation]:nth-child(1) span'
         }
     },
     delays: {

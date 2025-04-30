@@ -99,7 +99,7 @@ export class SearchHandler {
         const elements = document.querySelectorAll(selector);
         return Array.from(elements)
           .map((el) => el.textContent || '')
-          .filter(Boolean);
+          .filter(Boolean); // pas sûr du but recherché, est-ce un typo ?
       }, config.selectors.suggestions.items);
 
       return {
@@ -117,3 +117,9 @@ export class SearchHandler {
     }
   }
 }
+
+/*
+Et donc à partir des résultats de la recherche, on génère un Markdown (ou modifie un fichier existant)
+Et ensuite, de mon côté je fais un bout de code pour extraire les thèmes trouvés depuis le markdown et j'interroge OpenAI pour générer du contenu, qui est lui même ajouté au markdown ??
+*/
+
