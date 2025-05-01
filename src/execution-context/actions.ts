@@ -1,3 +1,5 @@
+import { ActionLog } from './execution-context.js'
+
 export interface Action {
   name: string
   description: string
@@ -8,12 +10,14 @@ export interface Action {
   }[]
 }
 
-export interface ActionHandler {
-  execute(params: string[]): Promise<void>
+export interface ActionHandler<T> {
+  execute(params: string[]): Promise<ActionResult<T>>
 }
 
-export interface ActionResult {
+export interface ActionResult<T> {
   success: boolean
-  message: string
-  data?: any
+  value?: T // If success and pertinent, the value returned by the action
+  path?: string // path of the state variable affected by the action
+  message?: string
+  logs: ActionLog[]
 }

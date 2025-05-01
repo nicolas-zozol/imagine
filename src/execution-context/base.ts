@@ -1,17 +1,32 @@
 import { ActionHandler, ActionResult } from './actions.js'
+import { ActionLog } from './execution-context.js'
 
-export abstract class BaseAction implements ActionHandler {
-  abstract execute(params: string[]): Promise<void>
+export abstract class BaseAction<T> implements ActionHandler<T> {
+  abstract execute(params: string[]): Promise<ActionResult<T>>
 
-  protected async handleResult(result: ActionResult): Promise<void> {
+  protected handleSuccess(message: string, value: T): ActionResult<T> {
+    const log: ActionLog = {
+      action: this.toString(),
+      message,
+      timestamp: new Date().toISOString(),
+      value,
+    }
+    const result: ActionResult<T> = {
+      success: true,
+      value,
+      message,
+      logs: [log],
+    }
     if (result.success) {
       console.log(`✅ ${result.message}`)
-      if (result.data) {
-        console.log('Data:', result.data)
-      }
     } else {
       console.error(`❌ ${result.message}`)
     }
+    return result
+  }
+
+  protected handleError(message: string): string {
+    return message
   }
 
   protected async cleanup(): Promise<void> {}

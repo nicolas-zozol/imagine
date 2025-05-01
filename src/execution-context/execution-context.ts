@@ -29,7 +29,7 @@ export interface ExecutionContext {
     extra: Serializable // extra info
   }
   extra: Serializable // for tool-specific namespaces (e.g. context.puppet)
-  update: (actionResult: ActionResult) => ExecutionContext // update the context with action result
+  update: (actionResult: ActionResult<any>) => void // update the context with action result
 }
 
 /**
@@ -71,6 +71,7 @@ export interface ExecutionContext {
  */
 export interface ActionLog {
   action: string
+  message?: string
   value?: any
   timestamp: string
   error?: string

@@ -2,11 +2,11 @@ import { Page } from 'puppeteer'
 import { BaseAction } from '../../execution-context/base.js'
 import { BrowserManager } from '../browser/index.js'
 
-export abstract class BasePuppetAction extends BaseAction {
+export abstract class BasePuppetAction<T> extends BaseAction<T> {
   protected page: Page
   protected browserManager: BrowserManager
 
-  constructor(
+  protected constructor(
     browserManager: BrowserManager,
     public options: PuppetActionOptions = {},
   ) {

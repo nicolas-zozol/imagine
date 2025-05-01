@@ -1,23 +1,19 @@
+import { ActionResult } from '../../execution-context/actions.js'
+import { errorToString } from '../../utils/error-to-string.js'
 import { BrowserManager } from '../browser/index.js'
 import { BasePuppetAction } from './base-puppet-action.js'
 
-export class CloseAction extends BasePuppetAction {
+export class CloseAction extends BasePuppetAction<void> {
   constructor(browserManager: BrowserManager) {
     super(browserManager)
   }
 
-  async execute(params: string[]): Promise<void> {
+  async execute(): Promise<ActionResult<void>> {
     try {
       await this.browserManager.close()
-      await this.handleResult({
-        success: true,
-        message: 'Browser closed successfully',
-      })
+      return this.handleSuccess('Browser closed successfully')
     } catch (error) {
-      await this.handleResult({
-        success: false,
-        message: `Error closing browser: ${error instanceof Error ? error.message : 'Unknown error'}`,
-      })
+      throw this.handleError(`Error closing browser: ${errorToString(error)}`)
     }
   }
 }

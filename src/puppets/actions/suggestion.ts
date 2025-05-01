@@ -1,4 +1,6 @@
 import { Page } from 'puppeteer'
+import { ActionResult } from '../../execution-context/actions.js'
+import { errorToString } from '../../utils/error-to-string.js'
 import { config } from '../config'
 import { sleep } from '../utils/delay'
 import { BrowserManager } from '../browser/index.js'
@@ -16,7 +18,7 @@ export interface SuggestionResult {
   timestamp: Date
 }
 
-export class GoogleSuggestionsAction extends BasePuppetAction {
+export class GoogleSuggestionsAction extends BasePuppetAction<string[]> {
   private searchHandler: SearchHandler
 
   constructor(browserManager: BrowserManager, options: PuppetActionOptions) {
@@ -24,13 +26,9 @@ export class GoogleSuggestionsAction extends BasePuppetAction {
     this.searchHandler = new SearchHandler(this.page)
   }
 
-  async execute(params: string[]): Promise<void> {
+  async execute(params: string[]): Promise<ActionResult<string[]>> {
     if (params.length === 0) {
-      await this.handleResult({
-        success: false,
-        message: 'No search terms provided',
-      })
-      return
+      throw this.handleError('No search terms provided')
     }
 
     try {
@@ -40,18 +38,13 @@ export class GoogleSuggestionsAction extends BasePuppetAction {
       console.log(`\n🔍 Processing query: "${query}"`)
 
       const result = await this.searchHandler.captureSuggestions(query)
-      await this.handleResult({
-        success: true,
-        message: `Found ${result.suggestions.length} suggestions for "${query}"`,
-        data: result.suggestions,
-      })
-
       await sleep(config.delays.betweenQueries)
+      return this.handleSuccess(
+        `Found ${result.suggestions.length} suggestions for "${query}"`,
+        result.suggestions,
+      )
     } catch (error) {
-      await this.handleResult({
-        success: false,
-        message: `Error performing search: ${error instanceof Error ? error.message : 'Unknown error'}`,
-      })
+      throw this.handleError(`Error performing search: ${errorToString(error)}`)
     } finally {
       await this.cleanup()
     }

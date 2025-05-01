@@ -1,32 +1,24 @@
+import { ActionResult } from '../../execution-context/actions.js'
+import { errorToString } from '../../utils/error-to-string.js'
 import { BrowserManager } from '../browser/index.js'
 import { BasePuppetAction, PuppetActionOptions } from './base-puppet-action.js'
 
-export class OpenAction extends BasePuppetAction {
+export class OpenAction extends BasePuppetAction<void> {
   constructor(browserManager: BrowserManager, options: PuppetActionOptions) {
     super(browserManager, options)
   }
 
-  async execute(params: string[]): Promise<void> {
+  async execute(params: string[]): Promise<ActionResult<void>> {
     if (params.length === 0) {
-      await this.handleResult({
-        success: false,
-        message: 'No URL provided',
-      })
-      return
+      throw this.handleError('No URL provided')
     }
 
     const url = params[0]
     try {
       await this.browserManager.navigateTo(url)
-      await this.handleResult({
-        success: true,
-        message: `Successfully opened ${url}`,
-      })
+      return this.handleSuccess(`Successfully opened ${url}`)
     } catch (error) {
-      await this.handleResult({
-        success: false,
-        message: `Error opening ${url}: ${error instanceof Error ? error.message : 'Unknown error'}`,
-      })
+      throw this.handleError(`Error opening ${url}: ${errorToString(error)}`)
     }
   }
 }

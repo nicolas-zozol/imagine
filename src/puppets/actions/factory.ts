@@ -60,7 +60,7 @@ export class ActionFactory {
     this.launched = true
   }
 
-  createAction(action: string): BaseAction {
+  createAction(action: string): BaseAction<any> {
     if (!this.launched) {
       throw new Error(
         'BrowserManager not launched. Call factory.launch() before creating actions.',

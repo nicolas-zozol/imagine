@@ -1,3 +1,5 @@
+import { ActionResult } from '../../execution-context/actions.js'
+import { errorToString } from '../../utils/error-to-string.js'
 import { BasePuppetAction, PuppetActionOptions } from './base-puppet-action.js'
 
 // Map of predefined selector aliases
@@ -13,11 +15,11 @@ export function addPredefinedSelectors(newSelectors: {
   Object.assign(predefinedSelectors, newSelectors)
 }
 
-export class ClickAction extends BasePuppetAction {
+export class ClickAction extends BasePuppetAction<void> {
   constructor(browserManager: any, options: PuppetActionOptions) {
     super(browserManager, options)
   }
-  async execute(params: string[]): Promise<void> {
+  async execute(params: string[]): Promise<ActionResult<void>> {
     if (params.length === 0) {
       throw new Error(
         'ClickAction requires a selector or alias (@alias) as the first parameter.',
@@ -42,12 +44,12 @@ export class ClickAction extends BasePuppetAction {
       await this.page.waitForSelector(selector, { timeout: 5000 })
       await this.page.click(selector)
       const logSelector = aliasUsed ? `@${aliasUsed} (${selector})` : selector
-      console.log(`✅ Clicked on selector: ${logSelector}`)
+      const message = `✅ Clicked on selector: ${logSelector}`
+      return this.handleSuccess(message)
     } catch (error: any) {
       const logSelector = aliasUsed ? `@${aliasUsed} (${selector})` : selector
-      console.error(
-        `❌ Failed to click on selector "${logSelector}": ${error.message}`,
-      )
+      const errorMessage = `❌ Failed to click on selector "${logSelector}": ${errorToString(error)}`
+      this.handleError(errorMessage)
       throw error
     }
     // No cleanup here, it should be handled by the orchestrator or runner
