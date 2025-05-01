@@ -1,9 +1,8 @@
 import { Page } from 'puppeteer'
 import { config } from '../config'
 import { sleep } from '../utils/delay'
-import { BaseAction } from './base'
-import { ActionOptions, ActionConfig } from '../types/actions'
 import { BrowserManager } from '../browser/index.js'
+import { BasePuppetAction, PuppetActionOptions } from './base-puppet-action.js'
 
 const searchSelectors = {
   searchInput: 'textarea[name="q"]',
@@ -17,19 +16,15 @@ export interface SuggestionResult {
   timestamp: Date
 }
 
-export class GoogleSuggestionsAction extends BaseAction {
+export class GoogleSuggestionsAction extends BasePuppetAction {
   private searchHandler: SearchHandler
 
-  constructor(
-    browserManager: BrowserManager,
-    options: ActionOptions,
-    config: ActionConfig,
-  ) {
-    super(browserManager, options, config)
+  constructor(browserManager: BrowserManager, options: PuppetActionOptions) {
+    super(browserManager, options)
     this.searchHandler = new SearchHandler(this.page)
   }
 
-  async execute(params: string[], options: ActionOptions): Promise<void> {
+  async execute(params: string[]): Promise<void> {
     if (params.length === 0) {
       await this.handleResult({
         success: false,

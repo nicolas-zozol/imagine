@@ -1,4 +1,3 @@
-import OpenAI from 'openai'
 import { getOpenAi } from '../get-open-ai-key.js'
 
 export async function createImage(prompt: string): Promise<string | null> {
