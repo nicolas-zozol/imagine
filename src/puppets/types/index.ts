@@ -7,7 +7,8 @@ export interface BrowserConfig {
     args: string[];
 }
 
-export interface SearchResult {
+/*
+export interface SuggestionResult {
     query: string;
     suggestions: string[];
     timestamp: Date;
@@ -23,14 +24,17 @@ export interface GoogleSelectors {
         container: string;
         items: string;
     };
-}
+}*/
 
 export interface Config {
     baseUrl: string;
-    selectors: GoogleSelectors;
+   // selectors: GoogleSelectors;
     delays: {
         betweenQueries: number; // in milliseconds
-        afterCookieConsent: number;
+       /* afterCookieConsent: number;*/
         afterTyping: number;
+        smallDelay: number;
+        mediumDelay: number;
+        largeDelay: number;
     };
 } 
