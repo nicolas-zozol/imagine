@@ -1,8 +1,7 @@
 import { ActionFactory } from './actions/factory'
-import { Action } from '../execution-context/actions.js'
 
 function parseArgs(args: string[]): {
-  action: Action
+  action: string
   params: string[]
 } {
   const keepOpenIndex = args.indexOf('--keep-open')
@@ -26,7 +25,7 @@ function parseArgs(args: string[]): {
   }
 
   const [actionName, ...params] = filteredArgs
-  const action = actionName as Action
+  const action = actionName
 
   return {
     action,
@@ -45,7 +44,6 @@ async function main() {
   const actionHandler = factory.createAction(action)
 
   await actionHandler.execute(params)
-  //await browserManager.close();
 }
 
 main().catch(console.error)
