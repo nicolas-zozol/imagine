@@ -1,15 +1,14 @@
 import './hello-ai.js'
 import dotenv from 'dotenv'
 import { BrowserManager } from '../puppets/browser/index.js'
-import { Action } from '../execution-context/actions.js'
 import { ActionFactory } from '../puppets/actions/factory.js'
 import fs from 'node:fs/promises'
 
 dotenv.config()
 
-function parseLine(line: string): { action: Action; params: string[] } {
+function parseLine(line: string): { action: string; params: string[] } {
   const [actionName, ...rest] = line.trim().split(/\s+/)
-  return { action: actionName as Action, params: rest }
+  return { action: actionName, params: rest }
 }
 
 async function runScript(script: string, keepOpenFlag = false) {
@@ -58,7 +57,7 @@ async function main() {
 main().catch(console.error)
 
 function parseArgs(args: string[]): {
-  action: Action
+  action: string
   params: string[]
 } {
   const keepOpenIndex = args.indexOf('--keep-open')
@@ -82,7 +81,7 @@ function parseArgs(args: string[]): {
   }
 
   const [actionName, ...params] = filteredArgs
-  const action = actionName as Action
+  const action = actionName
 
   return {
     action,
