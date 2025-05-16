@@ -1,6 +1,10 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 import { z } from 'zod'
+import { writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import { MCPServerCommand } from './command.js'
+import { FilesystemClient } from './filesystem.client.js'
 
 // Define command line arguments schema
 const argsSchema = z.object({
@@ -19,18 +23,20 @@ const args = argsSchema.parse({
 })
 
 // Configure server command based on type
-const getServerCommand = () => {
+function getServerCommand(): MCPServerCommand {
   switch (args.server) {
     case 'filesystem':
       if (!args.path)
         throw new Error('--path is required for filesystem server')
       return {
+        tool: 'filesystem',
         command: 'npx',
         args: ['-y', '@modelcontextprotocol/server-filesystem', args.path],
       }
     case 'postgres':
       if (!args.url) throw new Error('--url is required for postgres server')
       return {
+        tool: 'postgres',
         command: 'npx',
         args: ['-y', '@modelcontextprotocol/server-postgres', args.url],
       }
@@ -39,7 +45,49 @@ const getServerCommand = () => {
   }
 }
 
+/**
+ * Saves the tools list to a JSON file in the tools directory
+ * @param tools The tools list to save
+ * @param serverType The type of server (filesystem or postgres)
+ */
+async function saveToolsToFile(
+  tools: unknown,
+  serverType: string,
+): Promise<void> {
+  const fileName = `${serverType}.client.json`
+  const filePath = join(
+    process.cwd(),
+    'src',
+    'mcp',
+    'client',
+    'tools',
+    fileName,
+  )
+
+  try {
+    await writeFile(filePath, JSON.stringify(tools, null, 2))
+    console.log(`Tools saved to ${filePath}`)
+  } catch (error) {
+    console.error(`Error saving tools to file: ${error}`)
+  }
+}
+
 async function main() {
+  const command = getServerCommand()
+  if (command.tool === 'filesystem') {
+    console.log('Connecting to filesystem server...')
+    const client = new FilesystemClient(command)
+    await client.connect()
+    const fileContent = await client.readFile('README.md')
+    console.log(`Current path: ${process.cwd()}`)
+    console.log(fileContent)
+    await client.shutdown()
+    return
+  }
+
+  if (2 < 5) {
+    return
+  }
   try {
     // Create transport and client
     const transport = new StdioClientTransport(getServerCommand())
@@ -54,7 +102,9 @@ async function main() {
     try {
       console.log('\nAvailable Tools:')
       const tools = await client.listTools()
-      console.log(JSON.stringify(tools, null, 2))
+
+      // Save tools to file
+      await saveToolsToFile(tools, args.server)
     } catch (error) {
       console.log('Tools not supported by this server')
     }
@@ -75,8 +125,8 @@ async function main() {
         const result = await client.callTool({
           name: 'list',
           arguments: {
-            path: args.path
-          }
+            path: args.path,
+          },
         })
         console.log(JSON.stringify(result, null, 2))
       } catch (error) {
