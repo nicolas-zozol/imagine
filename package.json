@@ -11,18 +11,22 @@
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "watch": "tsc -p . --watch",
     "script": "vite-node src/script/run-script.ts src/script/search-google.md",
-    "puppets": "vite-node src/puppets/index.ts search haiku"
+    "puppets": "vite-node src/puppets/index.ts search haiku",
+    "start": "tsx src/mcp/client/client.ts"
   },
   "dependencies": {
     "openai": "^4.93.0",
     "dotenv": "^16.4.7",
-    "puppeteer": "^21.7.0"
+    "puppeteer": "^21.7.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "typescript": "^5",
     "@types/node": "^20",
     "vite-node": "^3.1.1",
     "@types/puppeteer": "^7.0.4",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "tsx": "^4.19.4"
   }
 }
