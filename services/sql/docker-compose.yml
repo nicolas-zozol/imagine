@@ -1,0 +1,31 @@
+---
+services:
+  # POSTGRES: https://github.com/docker-library/postgres
+  pg:
+    image: timescale/timescaledb:2.2.0-pg13
+    container_name: timescaledb
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}  # default is postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    ports: ["5432:5432"]
+
+  # Very interesting: check mysql env reference https://hub.docker.com/_/mysql
+  my:
+    image: mysql:8.0.3
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports: ["3306:3306"]
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    ports:
+      - 8080:8080
+
+# try `docker-compose config` to check env data are well set
+# When you log into adminer, you must set db url as 'pg' and 'my'
+# Why ? Because docker network has no idea of your localhost

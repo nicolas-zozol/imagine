@@ -1,5 +1,6 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
+import { BaseClient } from './base-client.js'
 import { MCPServerCommand } from './command.js'
 
 interface MCPToolResult {
@@ -9,34 +10,12 @@ interface MCPToolResult {
   }>
 }
 
-export class FilesystemClient {
-  private client: Client
-  private transport: StdioClientTransport
-
+export class FilesystemClient extends BaseClient {
   constructor(command: MCPServerCommand) {
-    this.transport = new StdioClientTransport(command)
-    this.client = new Client({
-      name: 'mcp-filesystem-client',
-      version: '0.1.0',
-    })
+    super(command, 'mcp-filesystem-client')
+
     this.client.onclose = () => {
       console.log('### Client closed')
-    }
-  }
-
-  async connect(): Promise<void> {
-    await this.client.connect(this.transport)
-  }
-
-  async shutdown(): Promise<void> {
-    try {
-      // First close the client connection
-      await this.client.close()
-      
-      // Then close the transport which will terminate the child process
-      await this.transport.close()
-    } catch (error) {
-      console.error('Error during shutdown:', error)
     }
   }
 

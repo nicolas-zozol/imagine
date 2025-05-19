@@ -5,6 +5,7 @@ import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { MCPServerCommand } from './command.js'
 import { FilesystemClient } from './filesystem.client.js'
+import { PostgresClient } from './postgres.client.js'
 
 // Define command line arguments schema
 const argsSchema = z.object({
@@ -84,10 +85,17 @@ async function main() {
     await client.shutdown()
     return
   }
-
-  if (2 < 5) {
+  if (command.tool === 'postgres') {
+    console.log('Connecting to POSTGRES DATABASE...')
+    const client = new PostgresClient(command)
+    await client.connect()
+    const request = 'SELECT * FROM test LIMIT 50'
+    const dbContent = await client.query(request)
+    console.log(dbContent)
+    await client.shutdown()
     return
   }
+
   try {
     // Create transport and client
     const transport = new StdioClientTransport(getServerCommand())
