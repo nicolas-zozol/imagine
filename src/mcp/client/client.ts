@@ -77,7 +77,7 @@ async function main() {
   const command = getServerCommand()
   if (command.tool === 'filesystem') {
     console.log('Connecting to filesystem server...')
-    const client = new FilesystemClient(command)
+    const client = new FilesystemClient()
     await client.connect()
     const fileContent = await client.readFile('README.md')
     console.log(`Current path: ${process.cwd()}`)
@@ -87,7 +87,7 @@ async function main() {
   }
   if (command.tool === 'postgres') {
     console.log('Connecting to POSTGRES DATABASE...')
-    const client = new PostgresClient(command)
+    const client = new PostgresClient()
     await client.connect()
     const request = 'SELECT * FROM test LIMIT 50'
     const dbContent = await client.query(request)

@@ -5,18 +5,29 @@ import { MCPServerCommand } from './command.js'
 export abstract class BaseClient {
   public client: Client
   protected transport: StdioClientTransport
+  connected = false
 
-  protected constructor(command: MCPServerCommand, name: string) {
+  protected constructor(public server: string) {
+    const command = getServerCommand(server)
     this.transport = new StdioClientTransport(command)
-    this.client = new Client({ name, version: '0.1.0' })
+    this.client = new Client({ name: command.tool, version: '0.1.0' })
+  }
+
+  isClosed(): boolean {
+    return !this.isConnected()
+  }
+  isConnected(): boolean {
+    return this.connected
   }
 
   async connect(): Promise<void> {
     await this.client.connect(this.transport)
+    this.connected = true
   }
 
   async shutdown(): Promise<void> {
     try {
+      this.connected = false
       // First close the client connection
       await this.client.close()
 
@@ -26,4 +37,45 @@ export abstract class BaseClient {
       console.error('Error during shutdown:', error)
     }
   }
+
+  log(message: string): void {
+    // nop
+  }
+
+  async prepareCommand(command: string) {
+    if (this.isClosed()) {
+      this.log('Client is closed, connecting...')
+      await this.connect()
+    }
+    this.log(`Executing command: ${command}`)
+  }
+}
+
+function getServerCommand(server: string): MCPServerCommand {
+  switch (server) {
+    case 'filesystem':
+      const path = getEnv('MOTHER_FILEPATH')
+      if (!path)
+        throw new Error('MOTHER_FILEPATH env is required for filesystem server')
+      return {
+        tool: 'filesystem',
+        command: 'npx',
+        args: ['-y', '@modelcontextprotocol/server-filesystem', path],
+      }
+    case 'postgres':
+      const url = getEnv('MOTHER_POSTGRES')
+      if (!url)
+        throw new Error('MOTHER_POSTGRES env is required for postgres server')
+      return {
+        tool: 'postgres',
+        command: 'npx',
+        args: ['-y', '@modelcontextprotocol/server-postgres', url],
+      }
+    default:
+      throw new Error(`Unknown server type: ${server}`)
+  }
+}
+
+function getEnv(key: string): string | undefined {
+  return process.env[key]
 }

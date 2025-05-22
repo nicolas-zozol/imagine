@@ -10,6 +10,8 @@
     "clean": "rm -rf dist",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "watch": "tsc -p . --watch",
+    "mcp-script": "vite-node src/script/script-mcp.ts",
+    "twitter-script": "vite-node src/script/script-twitter.ts",
     "script": "vite-node src/script/run-script.ts src/script/search-google.md",
     "puppets": "vite-node src/puppets/index.ts search haiku",
     "start": "tsx src/mcp/client/client.ts"
@@ -19,7 +21,8 @@
     "dotenv": "^16.4.7",
     "puppeteer": "^21.7.0",
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "@masala/parser": "^2.0.0-alpha.5"
   },
   "devDependencies": {
     "typescript": "^5",
@@ -27,6 +30,7 @@
     "vite-node": "^3.1.1",
     "@types/puppeteer": "^7.0.4",
     "prettier": "^3.5.3",
-    "tsx": "^4.19.4"
+    "tsx": "^4.19.4",
+    "vitest": "^3.1.4"
   }
 }

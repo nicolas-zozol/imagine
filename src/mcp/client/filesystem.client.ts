@@ -2,6 +2,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 import { BaseClient } from './base-client.js'
 import { MCPServerCommand } from './command.js'
+import path from 'path'
 
 interface MCPToolResult {
   content: Array<{
@@ -11,16 +12,26 @@ interface MCPToolResult {
 }
 
 export class FilesystemClient extends BaseClient {
-  constructor(command: MCPServerCommand) {
-    super(command, 'mcp-filesystem-client')
+  constructor() {
+    super('filesystem')
 
     this.client.onclose = () => {
       console.log('### Client closed')
     }
   }
 
+  getRootPath(): string {
+    const path = process.env.MOTHER_FILEPATH
+    if (!path) {
+      throw new Error('MOTHER_FILEPATH env is required for filesystem server')
+    }
+    return path
+  }
+
   async readFile(filePath: string): Promise<string> {
+    filePath = path.join(this.getRootPath(), filePath)
     try {
+      await this.prepareCommand('read_file')
       const result = (await this.client.callTool({
         name: 'read_file',
         arguments: {
@@ -36,6 +47,35 @@ export class FilesystemClient extends BaseClient {
       throw new Error('No content returned from read_file tool')
     } catch (error) {
       throw new Error(`Failed to read file: ${error}`)
+    }
+  }
+
+  /**
+   * Write content to a file, creating it if it doesn't exist or overwriting if it does
+   * @param filePath The path where to write the file
+   * @param content The content to write to the file
+   * @returns A promise that resolves when the file is written
+   */
+  async writeFile(filePath: string, content: string): Promise<void> {
+    filePath = path.join(this.getRootPath(), filePath)
+    try {
+      await this.prepareCommand('write_file')
+      console.log(`Writing to file: ${filePath}`)
+      const result = (await this.client.callTool({
+        name: 'write_file',
+        arguments: {
+          path: filePath,
+          content,
+        },
+      })) as MCPToolResult
+
+      // Check if the write was successful
+      if (!result.content || result.content.length === 0) {
+        throw new Error('No confirmation received from write_file tool')
+      }
+      console.log('File written successfully:', result.content)
+    } catch (error) {
+      throw new Error(`Failed to write file: ${error}`)
     }
   }
 }

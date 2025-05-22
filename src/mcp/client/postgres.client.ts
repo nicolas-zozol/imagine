@@ -9,8 +9,8 @@ interface MCPToolResult {
 }
 
 export class PostgresClient extends BaseClient {
-  constructor(command: MCPServerCommand) {
-    super(command, 'mcp-postgres-client')
+  constructor() {
+    super('postgres')
   }
 
   /**
@@ -20,6 +20,7 @@ export class PostgresClient extends BaseClient {
    */
   async query(sql: string): Promise<string> {
     try {
+      await this.prepareCommand('query')
       const result = (await this.client.callTool({
         name: 'query',
         arguments: {
@@ -29,7 +30,6 @@ export class PostgresClient extends BaseClient {
 
       // The result should contain the query results in the content array
       if (result.content && result.content.length > 0) {
-        console.log(result.content)
         return result.content[0].text
       }
 
