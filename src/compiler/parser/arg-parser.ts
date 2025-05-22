@@ -10,12 +10,9 @@
 
 import { F, C, N, SingleParser, GenLex } from '@masala/parser'
 import { ArgumentNode, IdentifierNode, LiteralNode } from './ast.js'
-
-const oneSpace = C.char(' ').or(C.char('\t')).or(C.char('\n')).or(F.eos())
-const spaces = oneSpace.rep()
+import { identifier, spaces } from './shared-parser.js'
 
 const equal = C.char('=')
-const identifier = F.regex(/[a-zA-Z_][a-zA-Z0-9_-]*/)
 
 const quote = C.char('"')
 
@@ -49,7 +46,7 @@ const fullExpression = openBracket
   .then(closeBracket.drop()) // as TupleParser<(string | number)[]>
   .array() as SingleParser<(string | number | boolean)[]>
 
-interface ArgTokens {
+export interface ArgTokens {
   EQUAL: SingleParser<string>
   IDENTIFIER: SingleParser<string>
   NUMBER_LITERAL: SingleParser<number>
@@ -133,7 +130,7 @@ function createGrammar(tokens: ArgTokens): SingleParser<ArgumentNode> {
   })) as SingleParser<ArgumentNode>
 }
 
-export function buildArgParser(): SingleParser<ArgumentNode> {
+export function buildArgParserForTests(): SingleParser<ArgumentNode> {
   const genlex = new GenLex()
   const tokens = createTokens(genlex)
   const grammar = createGrammar(tokens)

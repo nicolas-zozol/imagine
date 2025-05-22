@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { F, Streams } from '@masala/parser'
-import { buildArgParser } from './arg-parser.js'
+import { buildArgParserForTests } from './arg-parser.js'
+import { identifier } from './shared-parser.js'
 
 describe('Simple cases', () => {
   it('should parse a simple regex', () => {
@@ -16,10 +17,21 @@ describe('Simple cases', () => {
     expect(parsing2.isAccepted()).toBe(true)
     expect(parsing2.value).toEqual('10arg1!')
   })
+
+  it('should parse a identifier', () => {
+    const stream = Streams.ofString('arg_-1')
+    const parsing = identifier.parse(stream)
+    expect(parsing.isAccepted()).toBe(true)
+    expect(parsing.value).toEqual('arg_-1')
+
+    const stream2 = Streams.ofString('arg1-')
+    const parsing2 = identifier.parse(stream2)
+    expect(parsing2.isAccepted()).toBe(false)
+  })
 })
 
 describe('Genlex for arg parser', () => {
-  const grammar = buildArgParser()
+  const grammar = buildArgParserForTests()
 
   it('should accept a simple argument', () => {
     const stream = Streams.ofString('arg1 = val1')

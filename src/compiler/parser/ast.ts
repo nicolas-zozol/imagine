@@ -45,7 +45,8 @@ export interface ArgumentNode {
 
 export interface CommandNode {
   type: 'command'
-  command: IdentifierNode
+  package: IdentifierNode // @robusta -> { type: 'identifier', value: 'robusta' }
+  name: IdentifierNode
   args: ArgumentNode[]
   output?: IdentifierNode
 }
