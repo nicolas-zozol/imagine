@@ -2,6 +2,7 @@ export type LiteralNode =
   | LiteralStringNode
   | LiteralNumberNode
   | LiteralBooleanNode
+  | LiteralNullNode
 
 export interface LiteralStringNode {
   type: 'literal-string'
@@ -16,6 +17,11 @@ export interface LiteralNumberNode {
 export interface LiteralBooleanNode {
   type: 'literal-boolean'
   value: boolean
+}
+
+export interface LiteralNullNode {
+  type: 'literal-null'
+  value: null
 }
 
 export interface IdentifierNode {
