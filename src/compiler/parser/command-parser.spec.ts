@@ -12,7 +12,6 @@ describe('Genlex for command parser', () => {
       type: 'command',
       package: { type: 'identifier', value: 'package' },
       name: { type: 'identifier', value: 'name' },
-      args: [],
     })
   })
 

@@ -124,4 +124,10 @@ describe('Filter output for arg parser', () => {
     parsing = buildArgParserForTests().parse(stream)
     expect(parsing.isAccepted()).toBe(false)
   })
+
+  it('should NOT accept empty value', () => {
+    const stream = Streams.ofString('output = ')
+    const parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(false)
+  })
 })

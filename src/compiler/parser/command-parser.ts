@@ -57,7 +57,6 @@ export function createCommandGrammar(
       type: 'identifier',
       value: c.name,
     },
-    args: [],
   })) as SingleParser<CommandNode>
 }
 
