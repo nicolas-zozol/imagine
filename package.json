@@ -12,6 +12,7 @@
     "watch": "tsc -p . --watch",
     "mcp-script": "vite-node src/script/script-mcp.ts",
     "twitter-script": "vite-node src/script/script-twitter.ts",
+    "fetch-script": "vite-node src/script/script-fetch.ts",
     "script": "vite-node src/script/run-script.ts src/script/search-google.md",
     "puppets": "vite-node src/puppets/index.ts search haiku",
     "start": "tsx src/mcp/client/client.ts"

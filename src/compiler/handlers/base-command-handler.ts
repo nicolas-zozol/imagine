@@ -1,15 +1,23 @@
-import { ActionHandler, ActionResult } from './actions.js'
-import { ActionLog } from './execution-context.js'
+import { CommandHandler } from '../interpreter/command-registry.js'
+import {
+  ExecutionContext,
+  StatementLog,
+} from '../interpreter/execution-context.js'
+import { ActionResult } from './action-result.js'
 
-export abstract class BaseAction<T> implements ActionHandler<T> {
-  abstract execute(params: string[]): Promise<ActionResult<T>>
+export abstract class BaseCommandHandler<T> implements CommandHandler<T> {
+  abstract run(
+    args: Record<string, any>,
+    context: ExecutionContext,
+  ): Promise<ActionResult<T>>
 
   protected handleSuccess(message: string, value: T): ActionResult<T> {
-    const log: ActionLog = {
-      action: this.toString(),
+    const log: StatementLog = {
+      success: true,
+      statement: this.toString(),
+      start: new Date().toISOString(),
+      end: new Date().toISOString(),
       message,
-      timestamp: new Date().toISOString(),
-      value,
     }
     const result: ActionResult<T> = {
       success: true,

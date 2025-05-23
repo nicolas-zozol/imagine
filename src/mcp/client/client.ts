@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { MCPServerCommand } from './command.js'
-import { FilesystemClient } from './filesystem.client.js'
+import { FilesystemClient } from './filesystem/filesystem.client.js'
 import { PostgresClient } from './postgres.client.js'
 
 // Define command line arguments schema

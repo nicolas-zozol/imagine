@@ -1,10 +1,11 @@
 import { Page } from 'puppeteer'
-import { ActionResult } from '../../execution-context/actions.js'
+import { ActionResult } from '../../compiler/handlers/action-result.js'
+import { BaseCommandHandler } from '../../compiler/handlers/base-command-handler.js'
+import { ExecutionContext } from '../../compiler/interpreter/execution-context.js'
 import { errorToString } from '../../utils/error-to-string.js'
+import { getBrowserManager } from '../browser/browser-manager.js'
 import { config } from '../config'
 import { sleep } from '../utils/delay'
-import { BrowserManager } from '../browser/index.js'
-import { BasePuppetAction, PuppetActionOptions } from './base-puppet-action.js'
 
 const searchSelectors = {
   searchInput: 'textarea[name="q"]',
@@ -18,26 +19,33 @@ export interface SuggestionResult {
   timestamp: Date
 }
 
-export class GoogleSuggestionsAction extends BasePuppetAction<string[]> {
-  private searchHandler: SearchHandler
+export class GoogleSuggestionsAction extends BaseCommandHandler<string[]> {
+  private searchHandler: SearchHandler | undefined
 
-  constructor(browserManager: BrowserManager, options: PuppetActionOptions) {
-    super(browserManager, options)
-    this.searchHandler = new SearchHandler(this.page)
-  }
+  async run(
+    args: string[],
+    context: ExecutionContext,
+  ): Promise<ActionResult<string[]>> {
+    const browserManager = getBrowserManager(context)
+    this.searchHandler = new SearchHandler(browserManager.getPage())
 
-  async execute(params: string[]): Promise<ActionResult<string[]>> {
-    if (params.length === 0) {
+    if (args.length === 0) {
       throw this.handleError('No search terms provided')
     }
+    const query: string = args.join(' ')
+    return this.execute(this.searchHandler, query)
+  }
 
+  async execute(
+    searchHandler: SearchHandler,
+    query: string,
+  ): Promise<ActionResult<string[]>> {
     try {
       // Process each search term
-      const query: string = params.join(' ')
 
       console.log(`\n🔍 Processing query: "${query}"`)
 
-      const result = await this.searchHandler.captureSuggestions(query)
+      const result = await searchHandler.captureSuggestions(query)
       await sleep(config.delays.betweenQueries)
       return this.handleSuccess(
         `Found ${result.suggestions.length} suggestions for "${query}"`,

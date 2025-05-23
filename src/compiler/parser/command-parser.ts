@@ -19,7 +19,7 @@ interface Command {
   name: string
 }
 
-const command: SingleParser<Command> = C.char('@')
+export const commandParser: SingleParser<Command> = C.char('@')
   .drop()
   .then(identifier)
   .then(C.char('/').drop())
@@ -37,7 +37,7 @@ export interface CommandTokens {
 export function createCommandTokens(genlex: GenLex): {
   COMMAND: SingleParser<Command>
 } {
-  const COMMAND = genlex.tokenize(command, 'COMMAND', 1000)
+  const COMMAND = genlex.tokenize(commandParser, 'COMMAND', 1000)
   return {
     COMMAND,
   }

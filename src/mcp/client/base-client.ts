@@ -63,13 +63,19 @@ function getServerCommand(server: string): MCPServerCommand {
         args: ['-y', '@modelcontextprotocol/server-filesystem', path],
       }
     case 'postgres':
-      const url = getEnv('MOTHER_POSTGRES')
-      if (!url)
+      const postgresUrl = getEnv('MOTHER_POSTGRES')
+      if (!postgresUrl)
         throw new Error('MOTHER_POSTGRES env is required for postgres server')
       return {
         tool: 'postgres',
         command: 'npx',
-        args: ['-y', '@modelcontextprotocol/server-postgres', url],
+        args: ['-y', '@modelcontextprotocol/server-postgres', postgresUrl],
+      }
+    case 'fetch':
+      return {
+        tool: 'fetch',
+        command: 'docker',
+        args: ['run', '-i', '--rm', 'mcp/fetch'],
       }
     default:
       throw new Error(`Unknown server type: ${server}`)

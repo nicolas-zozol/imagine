@@ -1,4 +1,4 @@
-import { FilesystemClient } from './filesystem.client.js'
+import { FilesystemClient } from './filesystem/filesystem.client.js'
 import { PostgresClient } from './postgres.client.js'
 
 export async function combineMcps() {
