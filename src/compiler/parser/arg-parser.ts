@@ -55,7 +55,7 @@ export interface ArgTokens {
   FULL_EXPRESSION: SingleParser<(string | number | boolean)[]>
 }
 
-function createArgumentTokens(genlex: GenLex): ArgTokens {
+export function createArgumentTokens(genlex: GenLex): ArgTokens {
   const EQUAL = genlex.tokenize(equal, 'EQUAL', 100)
 
   const IDENTIFIER = genlex.tokenize(identifier, 'IDENTIFIER', 800)
