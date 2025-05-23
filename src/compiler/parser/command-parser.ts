@@ -13,9 +13,6 @@ import { C, F, GenLex, SingleParser } from '@masala/parser'
 import { CommandNode } from './ast.js'
 import { identifier } from './shared-parser.js'
 
-const oneSpace = C.char(' ').or(C.char('\t')).or(C.char('\n')).or(F.eos())
-const spaces = oneSpace.rep()
-
 interface Command {
   type: 'command'
   package: string
@@ -37,14 +34,18 @@ export interface CommandTokens {
   COMMAND: SingleParser<Command>
 }
 
-function createTokens(genlex: GenLex): { COMMAND: SingleParser<Command> } {
-  const COMMAND = genlex.tokenize(command, 'COMMAND', 100)
+export function createCommandTokens(genlex: GenLex): {
+  COMMAND: SingleParser<Command>
+} {
+  const COMMAND = genlex.tokenize(command, 'COMMAND', 1000)
   return {
     COMMAND,
   }
 }
 
-function createGrammar(tokens: CommandTokens): SingleParser<CommandNode> {
+export function createCommandGrammar(
+  tokens: CommandTokens,
+): SingleParser<CommandNode> {
   const { COMMAND } = tokens
   return COMMAND.map((c) => ({
     type: 'command',
@@ -62,7 +63,7 @@ function createGrammar(tokens: CommandTokens): SingleParser<CommandNode> {
 
 export function buildCommandParserForTest(): SingleParser<CommandNode> {
   const genlex = new GenLex()
-  const tokens = createTokens(genlex)
-  const grammar = createGrammar(tokens)
+  const tokens = createCommandTokens(genlex)
+  const grammar = createCommandGrammar(tokens)
   return genlex.use(grammar)
 }

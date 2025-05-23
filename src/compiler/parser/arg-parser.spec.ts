@@ -1,21 +1,27 @@
 import { describe, it, expect } from 'vitest'
 import { F, Streams } from '@masala/parser'
-import { buildArgParserForTests } from './arg-parser.js'
+import { buildArgParserForTests, simpleString } from './arg-parser.js'
 import { identifier } from './shared-parser.js'
 
 describe('Simple cases', () => {
   it('should parse a simple regex', () => {
-    const identifier = F.regex(/[a-zA-Z_][a-zA-Z0-9_-]*/)
-    const stream = Streams.ofString('arg1')
-    const parsing = identifier.parse(stream)
+    let stream = Streams.ofString('arg1')
+    let parsing = identifier.parse(stream)
     expect(parsing.isAccepted()).toBe(true)
     expect(parsing.value).toEqual('arg1')
 
-    const simpleString = F.regex(/[a-zA-Z_0-9-'`$&€£%!@.;?/+*]+/)
-    const stream2 = Streams.ofString('10arg1!')
-    const parsing2 = simpleString.parse(stream2)
-    expect(parsing2.isAccepted()).toBe(true)
-    expect(parsing2.value).toEqual('10arg1!')
+    stream = Streams.ofString('10arg1!')
+    parsing = simpleString.parse(stream)
+    expect(parsing.isAccepted()).toBe(true)
+    expect(parsing.value).toEqual('10arg1!')
+
+    stream = Streams.ofString('users')
+    parsing = simpleString.parse(stream)
+    expect(parsing.isAccepted()).toBe(false)
+
+    stream = Streams.ofString('users/10')
+    parsing = simpleString.parse(stream)
+    expect(parsing.isAccepted()).toBe(true)
   })
 
   it('should parse a identifier', () => {
@@ -40,7 +46,7 @@ describe('Genlex for arg parser', () => {
     expect(parsing.value).toEqual({
       type: 'argument',
       name: { type: 'identifier', value: 'arg1' },
-      value: { type: 'literal-string', value: 'val1' },
+      value: { type: 'identifier', value: 'val1' },
     })
   })
 
@@ -86,5 +92,36 @@ describe('Genlex for arg parser', () => {
       name: { type: 'identifier', value: 'arg1' },
       value: { type: 'literal-string', value: '10' },
     })
+  })
+})
+
+describe('Filter output for arg parser', () => {
+  it('should accept a output argument', () => {
+    const stream = Streams.ofString('output = users')
+    const parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(true)
+    expect(parsing.value).toEqual({
+      type: 'argument',
+      name: { type: 'identifier', value: 'output' },
+      value: { type: 'identifier', value: 'users' },
+    })
+  })
+
+  it('should NOT accept a output argument that is not an identifier', () => {
+    let stream = Streams.ofString('output = "arg1"')
+    let parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(false)
+
+    stream = Streams.ofString('output = 10')
+    parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(false)
+
+    stream = Streams.ofString('output = 10asString')
+    parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(false)
+
+    stream = Streams.ofString('output = {action:10} ')
+    parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(false)
   })
 })

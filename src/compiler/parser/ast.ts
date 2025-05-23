@@ -42,18 +42,22 @@ export interface ArgumentNode {
   name: IdentifierNode
   value: ExpressionNode
 }
-
 export interface CommandNode {
   type: 'command'
   package: IdentifierNode // @robusta -> { type: 'identifier', value: 'robusta' }
   name: IdentifierNode
+}
+
+export interface StatementNode {
+  type: 'statement'
+  command: CommandNode
   args: ArgumentNode[]
   output?: IdentifierNode
 }
 
 export interface ProgramNode {
   type: 'program'
-  body: CommandNode[]
+  body: StatementNode[]
 }
 
 export type DslAstNode =

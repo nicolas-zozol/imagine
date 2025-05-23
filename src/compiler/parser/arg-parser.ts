@@ -17,9 +17,9 @@ const equal = C.char('=')
 const quote = C.char('"')
 
 const numberLiteral = N.number()
-const simpleString = F.regex(/[a-zA-Z_0-9-'`$&€£%!@.;?/+*]+/).filter((v) =>
-  isNaN(Number(v)),
-)
+export const simpleString = F.regex(/[a-zA-Z_0-9-'`$&€£%!@.;?/+*]+/)
+  .filter((v) => isNaN(Number(v)))
+  .filter((value) => !identifier.thenEos().val(value))
 
 const stringLiteral = quote
   .then(F.not(C.charIn('"\n')).rep())
@@ -55,7 +55,7 @@ export interface ArgTokens {
   FULL_EXPRESSION: SingleParser<(string | number | boolean)[]>
 }
 
-function createTokens(genlex: GenLex): ArgTokens {
+function createArgumentTokens(genlex: GenLex): ArgTokens {
   const EQUAL = genlex.tokenize(equal, 'EQUAL', 100)
 
   const IDENTIFIER = genlex.tokenize(identifier, 'IDENTIFIER', 800)
@@ -81,7 +81,9 @@ function createTokens(genlex: GenLex): ArgTokens {
   }
 }
 
-function createGrammar(tokens: ArgTokens): SingleParser<ArgumentNode> {
+export function createArgGrammar(
+  tokens: ArgTokens,
+): SingleParser<ArgumentNode> {
   const {
     EQUAL,
     IDENTIFIER,
@@ -108,11 +110,12 @@ function createGrammar(tokens: ArgTokens): SingleParser<ArgumentNode> {
     value,
   })) as SingleParser<LiteralNode>
   const identifierForString = IDENTIFIER.map((value) => ({
-    type: 'literal-string',
+    type: 'identifier',
     value,
-  })) as SingleParser<LiteralNode>
+  })) as SingleParser<IdentifierNode>
 
-  let ANY_LITERAL: SingleParser<LiteralNode> = F.tryAll([
+  let ANY_LITERAL: SingleParser<LiteralNode | IdentifierNode> = F.tryAll([
+    identifier,
     stringLiteral,
     numberLiteral,
     simpleString,
@@ -121,23 +124,26 @@ function createGrammar(tokens: ArgTokens): SingleParser<ArgumentNode> {
 
   ANY_LITERAL = ANY_LITERAL.map(literalMapper)
 
-  const arg = identifier.then(EQUAL.drop()).then(ANY_LITERAL)
+  const arg = identifier.then(EQUAL.drop()).then(ANY_LITERAL).debug('&&arg')
 
-  return arg.map((tuple) => ({
+  const unfilteredParser = arg.map((tuple) => ({
     type: 'argument',
     name: { type: 'identifier', value: tuple.first().value },
     value: { type: tuple.last().type, value: tuple.last().value },
   })) as SingleParser<ArgumentNode>
+  return filterOutputType(unfilteredParser)
 }
 
 export function buildArgParserForTests(): SingleParser<ArgumentNode> {
   const genlex = new GenLex()
-  const tokens = createTokens(genlex)
-  const grammar = createGrammar(tokens)
+  const tokens = createArgumentTokens(genlex)
+  const grammar = createArgGrammar(tokens)
   return genlex.use(grammar)
 }
 
-function literalMapper(node: LiteralNode): LiteralNode {
+function literalMapper(
+  node: LiteralNode | IdentifierNode,
+): LiteralNode | IdentifierNode {
   const value = node.value
   if (value === 'true') {
     return { type: 'literal-boolean', value: true }
@@ -149,4 +155,15 @@ function literalMapper(node: LiteralNode): LiteralNode {
     return { type: 'literal-null', value: null }
   }
   return node
+}
+
+function filterOutputType(
+  parser: SingleParser<ArgumentNode>,
+): SingleParser<ArgumentNode> {
+  return parser.filter((arg) => {
+    if (arg.type === 'argument' && arg.name.value === 'output') {
+      return arg.value.type === 'identifier'
+    }
+    return true
+  })
 }
