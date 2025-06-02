@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { F, Streams } from '@masala/parser'
 import { buildArgParserForTests, simpleString } from './arg-parser.js'
+import { PipeExpressionNode } from './ast.js'
 import { identifier } from './shared-parser.js'
 
 describe('Simple cases', () => {
@@ -92,6 +93,47 @@ describe('Genlex for arg parser', () => {
       name: { type: 'identifier', value: 'arg1' },
       value: { type: 'literal-string', value: '10' },
     })
+  })
+})
+
+describe('It should accept a pipe expression', () => {
+  it('should accept a pipe expression with no call', () => {
+    let stream = Streams.ofString(`input = {tweets}`)
+    let parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(true)
+    expect(parsing.value).toEqual({
+      type: 'argument',
+      name: { type: 'identifier', value: 'input' },
+      value: {
+        type: 'pipe',
+        input: { type: 'identifier', value: 'tweets' },
+        name: undefined,
+        args: [],
+      },
+    })
+  })
+
+  it('should accept a pipe expression with a call', () => {
+    let stream = Streams.ofString(`input = {tweets:reverse}`)
+    let parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(true)
+    expect(parsing.value).toEqual({
+      type: 'argument',
+      name: { type: 'identifier', value: 'input' },
+      value: {
+        type: 'pipe',
+        input: { type: 'identifier', value: 'tweets' },
+        name: 'reverse',
+        args: [],
+      },
+    })
+  })
+
+  it('should accept a pipe expression with arity', () => {
+    let stream = Streams.ofString(`input = {tweets:add:2:3}`)
+    let parsing = buildArgParserForTests().parse(stream)
+    expect(parsing.isAccepted()).toBe(true)
+    expect((parsing.value.value as PipeExpressionNode).args.length).toEqual(2)
   })
 })
 

@@ -1,5 +1,5 @@
 // Expression Evaluator
-import { CallExpressionNode, ExpressionNode } from '../parser/ast.js'
+import { PipeExpressionNode, ExpressionNode } from '../parser/ast.js'
 import { ExecutionContext } from './execution-context.js'
 
 export class ExpressionEvaluator {
@@ -11,7 +11,7 @@ export class ExpressionEvaluator {
       case 'literal-number':
       case 'literal-boolean':
         return expr.value
-      case 'call':
+      case 'pipe':
         return this.evaluateCall(expr, context)
       default:
         throw new Error(`Unknown expression type: ${(expr as any).type}`)
@@ -19,11 +19,15 @@ export class ExpressionEvaluator {
   }
 
   private evaluateCall(
-    expr: CallExpressionNode,
+    expr: PipeExpressionNode,
     context: ExecutionContext,
   ): any {
+    const input = this.evaluate(expr.input, context)
     const args = expr.args.map((arg) => this.evaluate(arg, context))
+
     switch (expr.name) {
+      case undefined:
+        return input // identity: just return the input
       case 'mappedBy':
         return args[0]?.map((item: any) => item[args[1]])
       case 'orderBy':

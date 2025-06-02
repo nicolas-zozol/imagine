@@ -10,6 +10,7 @@
     "clean": "rm -rf dist",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "watch": "tsc -p . --watch",
+    "demo-ai": "vite-node src/script/demo-ai.ts",
     "mcp-script": "vite-node src/script/script-mcp.ts",
     "twitter-script": "vite-node src/script/script-twitter.ts",
     "fetch-script": "vite-node src/script/script-fetch.ts",

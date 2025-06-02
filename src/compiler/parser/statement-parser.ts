@@ -73,3 +73,9 @@ export function buildStatementParserForTest(): SingleParser<StatementNode> {
   const grammar = createStatementGrammar(tokens)
   return genlex.use(grammar)
 }
+
+export function buildStatementParser(): SingleParser<StatementNode> {
+  const genlex = new GenLex()
+  const tokens = getStatementTokens(genlex)
+  return genlex.use(createStatementGrammar(tokens))
+}

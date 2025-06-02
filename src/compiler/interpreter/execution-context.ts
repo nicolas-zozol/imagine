@@ -24,3 +24,22 @@ export interface StatementLog {
   end: Timestamp
   errors?: string[]
 }
+
+export function createExecutionContext(
+  userId: string,
+  extra: Serializable = {},
+): ExecutionContext {
+  return {
+    env: {},
+    data: {},
+    extra,
+    meta: {
+      tool: undefined,
+      history: [],
+    },
+    user: {
+      id: userId,
+      extra: {},
+    },
+  }
+}

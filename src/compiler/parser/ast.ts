@@ -29,13 +29,14 @@ export interface IdentifierNode {
   value: string
 }
 
-export interface CallExpressionNode {
-  type: 'call'
-  name: string // e.g. "mappedBy", "concat", "orderBy"
+export interface PipeExpressionNode {
+  type: 'pipe'
+  input: IdentifierNode
+  name?: string // e.g. "mappedBy", "concat", "orderBy"
   args: ExpressionNode[] // e.g. [Identifier(tweets), Literal(id)]
 }
 
-export type ExpressionNode = IdentifierNode | LiteralNode | CallExpressionNode
+export type ExpressionNode = IdentifierNode | LiteralNode | PipeExpressionNode
 
 export interface ArgumentNode {
   type: 'argument'

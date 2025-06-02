@@ -8,8 +8,14 @@
  * So left is
  */
 
-import { F, C, N, SingleParser, GenLex } from '@masala/parser'
-import { ArgumentNode, IdentifierNode, LiteralNode } from './ast.js'
+import { F, C, N, SingleParser, GenLex, Tuple } from '@masala/parser'
+import { MixedTuple } from '@masala/parser/typings/tuple.js'
+import {
+  ArgumentNode,
+  PipeExpressionNode,
+  IdentifierNode,
+  LiteralNode,
+} from './ast.js'
 import { identifier, spaces } from './shared-parser.js'
 
 const equal = C.char('=')
@@ -38,7 +44,7 @@ const closeBracket = C.char('}')
 const colon = C.char(':')
 const colonExpression = anyLiteral.then(colon.drop()).optrep().then(anyLiteral)
 
-const fullExpression = openBracket
+const pipeExpression = openBracket
   .then(spaces.opt())
   .drop()
   .then(colonExpression)
@@ -67,7 +73,7 @@ export function createArgumentTokens(genlex: GenLex): ArgTokens {
   //const CLOSE_BRACKET = genlex.tokenize(closeBracket, 'CLOSE_BRACKET', 1000)
   //const COLON = genlex.tokenize(colon, 'COLON', 1000)
   const FULL_EXPRESSION = genlex.tokenize(
-    fullExpression,
+    pipeExpression,
     'FULL_EXPRESSION',
     5000,
   )
@@ -109,28 +115,43 @@ export function createArgGrammar(
     type: 'literal-string',
     value,
   })) as SingleParser<LiteralNode>
-  const identifierForString = IDENTIFIER.map((value) => ({
-    type: 'identifier',
-    value,
-  })) as SingleParser<IdentifierNode>
+  const fullExpression = FULL_EXPRESSION.map(
+    mapToPipe,
+  ) as SingleParser<PipeExpressionNode>
 
-  let ANY_LITERAL: SingleParser<LiteralNode | IdentifierNode> = F.tryAll([
+  let ANY_LITERAL: SingleParser<
+    LiteralNode | IdentifierNode | PipeExpressionNode
+  > = F.tryAll([
     identifier,
     stringLiteral,
     numberLiteral,
     simpleString,
-    identifierForString,
+    fullExpression,
   ])
 
   ANY_LITERAL = ANY_LITERAL.map(literalMapper)
 
-  const arg = identifier.then(EQUAL.drop()).then(ANY_LITERAL).debug('&&arg')
+  const arg = identifier.then(EQUAL.drop()).then(ANY_LITERAL)
 
-  const unfilteredParser = arg.map((tuple) => ({
-    type: 'argument',
-    name: { type: 'identifier', value: tuple.first().value },
-    value: { type: tuple.last().type, value: tuple.last().value },
-  })) as SingleParser<ArgumentNode>
+  const unfilteredParser = arg
+    .map(
+      (
+        tuple: MixedTuple<
+          IdentifierNode,
+          LiteralNode | IdentifierNode | PipeExpressionNode
+        >,
+      ) => ({
+        name: tuple.first().value,
+        valueNode: tuple.last(),
+      }),
+    )
+    .map(argMapper)
+
+  /**
+   * For the moment, the grammar accepts only output as identifier
+   * ie: output = users or output = tweets
+   * but not output = "users" or output = {tweets}
+   */
   return filterOutputType(unfilteredParser)
 }
 
@@ -141,9 +162,25 @@ export function buildArgParserForTests(): SingleParser<ArgumentNode> {
   return genlex.use(grammar)
 }
 
+function argMapper(argData: {
+  name: string
+  valueNode: LiteralNode | IdentifierNode | PipeExpressionNode
+}): ArgumentNode {
+  const argNode: ArgumentNode = {
+    type: 'argument',
+    name: { type: 'identifier', value: argData.name },
+    value: argData.valueNode,
+  }
+  return argNode
+}
+
 function literalMapper(
-  node: LiteralNode | IdentifierNode,
-): LiteralNode | IdentifierNode {
+  node: LiteralNode | IdentifierNode | PipeExpressionNode,
+): LiteralNode | IdentifierNode | PipeExpressionNode {
+  if (node.type === 'pipe') {
+    return node
+  }
+
   const value = node.value
   if (value === 'true') {
     return { type: 'literal-boolean', value: true }
@@ -166,4 +203,21 @@ function filterOutputType(
     }
     return true
   })
+}
+
+function mapToPipe(input: (string | number | boolean)[]): PipeExpressionNode {
+  return {
+    type: 'pipe',
+    input: { type: 'identifier', value: input[0] as string },
+    name: input[1] as string | undefined,
+    args: input.slice(2).map((arg) => {
+      if (typeof arg === 'string') {
+        return { type: 'identifier', value: arg }
+      } else if (typeof arg === 'number') {
+        return { type: 'literal-number', value: arg }
+      } else {
+        return { type: 'literal-boolean', value: arg }
+      }
+    }),
+  }
 }
