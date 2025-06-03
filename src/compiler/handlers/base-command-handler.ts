@@ -9,6 +9,7 @@ export abstract class BaseCommandHandler<T> implements CommandHandler<T> {
   abstract run(
     args: Record<string, any>,
     context: ExecutionContext,
+    output?: string,
   ): Promise<ActionResult<T>>
 
   protected handleSuccess(message: string, value: T): ActionResult<T> {

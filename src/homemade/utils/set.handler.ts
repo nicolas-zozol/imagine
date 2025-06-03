@@ -1,27 +1,17 @@
 import { ActionResult } from '../../compiler/handlers/action-result.js'
 import { BaseCommandHandler } from '../../compiler/handlers/base-command-handler.js'
-import { ExecutionContext } from '../../compiler/interpreter/execution-context.js'
 
-export class SetHandler extends BaseCommandHandler<void> {
-  async run(
-    args: Record<string, any>,
-    context: ExecutionContext,
-  ): Promise<ActionResult<void>> {
+export class SetHandler extends BaseCommandHandler<any> {
+  async run(args: Record<string, any>): Promise<ActionResult<any>> {
     const input = args.input as any
-    const output = args.output as string
 
-    if (input === undefined || output === undefined) {
-      throw new Error('Input and output are required')
+    if (input === undefined) {
+      throw new Error('Input is required')
     }
-    return this.set(context, input, output)
+    return this.set(input)
   }
 
-  async set(
-    context: ExecutionContext,
-    input: any,
-    output: string,
-  ): Promise<ActionResult<void>> {
-    context.data[output] = input
-    return this.handleSuccess(`Set ${output} successfully`)
+  async set(input: any): Promise<ActionResult<any>> {
+    return this.handleSuccess(`Set successfully`, input)
   }
 }
