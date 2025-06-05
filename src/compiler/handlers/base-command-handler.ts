@@ -27,9 +27,9 @@ export abstract class BaseCommandHandler<T> implements CommandHandler<T> {
       logs: [log],
     }
     if (result.success) {
-      console.log(`✅ ${result.message}`)
+      console.log(`✅ ${result.message} \n`)
     } else {
-      console.error(`❌ ${result.message}`)
+      console.error(`❌ ${result.message}\n`)
     }
     return result
   }

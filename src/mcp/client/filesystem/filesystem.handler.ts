@@ -20,7 +20,7 @@ export class FileSystemWriterHandler extends BaseCommandHandler<void> {
   ): Promise<ActionResult<void>> {
     try {
       await new FilesystemClient().writeFile(filePath, content)
-      return this.handleSuccess('loaded correctly')
+      return this.handleSuccess('Filesystem saved correctly')
     } catch (e) {
       throw this.handleError(errorToString(e))
     }

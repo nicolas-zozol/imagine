@@ -32,7 +32,7 @@ export class FetchHandler extends BaseCommandHandler<string> {
   ): Promise<ActionResult<string>> {
     try {
       const value = await new FetchClient().fetch(url, maxLength, start, raw)
-      return this.handleSuccess('loaded correctly', value)
+      return this.handleSuccess('Fetch executed correctly', value)
     } catch (e) {
       throw this.handleError(errorToString(e))
     }

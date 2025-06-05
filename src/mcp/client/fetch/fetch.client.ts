@@ -19,8 +19,15 @@ export class FetchClient extends BaseClient {
         start,
         raw,
       },
-    })) as { content: string }
-    console.log(result)
-    return result.content
+    })) as { content: any }
+    if (typeof result.content === 'string') {
+      return result.content
+    }
+    if (Array.isArray(result.content)) {
+      return result.content.map((item) => item.text).join('\n')
+    }
+    throw new Error(
+      `Unexpected content type: ${typeof result.content}. Expected string or array.`,
+    )
   }
 }

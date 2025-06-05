@@ -5,7 +5,7 @@ import { buildStatementParser } from '../compiler/parser/statement-parser.js'
 import { createExecutionContext } from '../compiler/interpreter/execution-context.js'
 
 const script = `
-@web/read url="https://www.robusta.build" output="site"
+@web/read url="https://www.robusta.build" output=site
 @utils/log message={site}
 @file/write path="site.txt" content={site}
 `
@@ -17,7 +17,7 @@ function splitScript(script: string): string[] {
     .filter((line) => line.length > 0)
 }
 
-function runDemo() {
+async function runDemo() {
   const registry = registerAllCommandHandlers()
   const interpreter = new StatementExecutor(registry)
   const statements = splitScript(script)
@@ -35,15 +35,15 @@ function runDemo() {
       })
       continue
     }
-    interpreter
-      .execute(ast.value, executionContext)
-      .then(() => {
-        console.log('Statement executed successfully:', statement)
-      })
-      .catch((error) => {
-        console.error('Error executing statement:', statement, error)
-      })
+    try {
+      await interpreter.execute(ast.value, executionContext)
+    } catch (error) {
+      console.error('Error executing statement:', statement, error)
+    }
   }
 }
 
-runDemo()
+runDemo().catch((e) => {
+  console.error('Demo execution failed:', e)
+  process.exit(1)
+})

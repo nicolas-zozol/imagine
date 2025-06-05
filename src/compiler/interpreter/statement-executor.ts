@@ -27,6 +27,5 @@ export class StatementExecutor {
     if (statement.output && result.success) {
       context.data[statement.output.value] = result.value
     }
-    console.log('Statement executed:', { ...result })
   }
 }
