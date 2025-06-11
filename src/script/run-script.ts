@@ -1,9 +1,7 @@
 import './hello-ai.js'
 import dotenv from 'dotenv'
-import { initContext } from '../execution-context/init-context.js'
-import { BrowserManager } from '../puppets/browser/index.js'
-import { ActionFactory } from '../puppets/actions/factory.js'
 import fs from 'node:fs/promises'
+import { BrowserManager } from '../puppets/browser/browser-manager.js'
 
 dotenv.config()
 

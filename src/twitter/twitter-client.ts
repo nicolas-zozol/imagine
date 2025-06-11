@@ -24,6 +24,8 @@ export interface TwitterUser {
 }
 
 export class TwitterClient {
+  version = 2
+
   constructor(public userBearer: string) {
     if (!this.userBearer) {
       throw new Error('userBearer is not set')
@@ -32,7 +34,8 @@ export class TwitterClient {
 
   async searchSubject(query: string): Promise<Array<Tweet[]>> {
     //https://api.x.com/2/tweets/search/recent?query="MCP server"&max_results=70&tweet.fields=geo,created_at,author_id,text
-    const url = `https://api.x.com/2/tweets/search/recent?query="${query}"&max_results=70&tweet.fields=geo,created_at,author_id,text`
+    const url = `https://api.x.com/2/tweets/search/recent?query="${query}"&max_results=20&tweet.fields=geo,created_at,author_id,text`
+
     const headers = {
       Authorization: `Bearer ${this.userBearer}`,
     }
