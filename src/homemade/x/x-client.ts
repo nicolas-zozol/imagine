@@ -1,5 +1,3 @@
-import { ExecutionContext } from '../../compiler/interpreter/execution-context.js'
-import { getRandomProxy } from '../../utils/get-proxy.js'
 import { TwitterApiResponse, Tweet } from './tweet.js'
 
 interface TwitterLoginRequest {
@@ -21,7 +19,6 @@ interface TwitterLoginResponse {
 
 export class XClient {
   twitterIoAccessToken: string | null = null
-  userAccessToken: string | null = null
 
   constructor() {
     this.twitterIoAccessToken = process.env['TWITTER_API_IO_KEY'] || null
@@ -49,7 +46,6 @@ export class XClient {
         },
       }
 
-      console.log(`Searching for: "${query}"`)
       const response = await fetch(searchUrl.toString(), options)
 
       if (!response.ok) {
@@ -62,11 +58,6 @@ export class XClient {
         throw new Error(`Search failed: ${searchResponse.message}`)
       }
 
-      console.log({ searchResponse })
-
-      console.log(
-        `Found ${searchResponse.tweets.length} tweets for query: "${query}"`,
-      )
       return searchResponse.tweets
     } catch (error) {
       if (error instanceof Error) {
@@ -76,4 +67,3 @@ export class XClient {
     }
   }
 }
-  

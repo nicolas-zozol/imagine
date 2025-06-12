@@ -23,6 +23,12 @@ export interface Tweet {
   retweeted_tweet?: Tweet
 }
 
+export interface Reply {
+  type: 'reply'
+  tweet_id: string
+  text: string
+}
+
 export interface User {
   type: 'user'
   userName: string
