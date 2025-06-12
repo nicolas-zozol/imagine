@@ -13,9 +13,12 @@ const context: ExecutionContext = {
 } as any
 
 describe('XClient', () => {
-  it('should connect to X', async () => {
-    const client = new XClient(context)
-    await client.connect()
-    expect(client.isConnected).toBe(true)
+  //TEST SUIT
+
+  it('should search to X', async () => {
+    // UT, Unit TEST
+    const client = new XClient()
+    const tweets = await client.search('Piastri')
+    expect(tweets.length).toBeGreaterThan(5)
   })
 })
