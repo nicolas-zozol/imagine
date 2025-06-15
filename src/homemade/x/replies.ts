@@ -38,3 +38,35 @@ I will give you a tweet, and you will make a nice positive
   }
   return response
 }
+export async function generateRepliesForTweetsAndPrompts(
+  tweets: Tweet[],
+  prompts: string[],
+  repliesNumber: number,
+  waitBetweenAIRequests = 0,
+) {
+  let response: Reply[] = []
+
+  for (const tweet of tweets) {
+    for (const prompt of prompts) {
+      for (let i = 0; i < repliesNumber; i++) {
+        let generatedReply = await generate(
+          prompt + tweet.text + ' . Just answer now.',
+        )
+        if (typeof generatedReply !== 'string') {
+          throw new Error('request is not a string')
+        }
+        response.push({
+          tweet_id: tweet.id,
+          text: generatedReply,
+          type: 'reply',
+        })
+        await wait(waitBetweenAIRequests)
+      }
+    }
+  }
+  return response
+}
+
+export function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}

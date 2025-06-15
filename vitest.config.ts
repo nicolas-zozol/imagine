@@ -4,6 +4,6 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   test: {
     // 60 000 ms  =  1 min
-    testTimeout: 120_000,
+    testTimeout: 1_120_000,
   },
 })
