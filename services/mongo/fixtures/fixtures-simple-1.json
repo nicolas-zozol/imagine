@@ -1,0 +1,9 @@
+{
+  "users": [
+    { "_id": "u1", "email": "alice@acme.io", "teamIds": [] },
+    { "_id": "u2", "email": "bob@acme.io",   "teamIds": [] }
+  ],
+  "teams": [
+    { "_id": "t1", "name": "Core", "userIds": ["u1", "u2"] }
+  ]
+}
