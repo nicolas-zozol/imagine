@@ -1,0 +1,631 @@
+{
+  "data": [
+    {
+      "edit_history_tweet_ids": [
+        "1924847114288296241"
+      ],
+      "created_at": "2025-05-20T15:18:08.000Z",
+      "id": "1924847114288296241",
+      "author_id": "14864055",
+      "text": "I started using @dariogriffo 's Postgres Memory MCP server last night and I adjusted my system prompts in Cursor to leverage it heavily. \n\nClaude / Gemini really short-change themselves by writing really tiny memories by default. I need to adjust so they include richer context"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924847009837781064"
+      ],
+      "created_at": "2025-05-20T15:17:43.000Z",
+      "id": "1924847009837781064",
+      "author_id": "818900155",
+      "text": "RT @Neuron_World: Excited to demo our recent integration with @hedera HCS-10 and @MoonscapeLabs, enabling Hedera AI agents to buy @SkyX_Net…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846852358472195"
+      ],
+      "created_at": "2025-05-20T15:17:06.000Z",
+      "id": "1924846852358472195",
+      "author_id": "52672213",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846728571658499"
+      ],
+      "created_at": "2025-05-20T15:16:36.000Z",
+      "id": "1924846728571658499",
+      "author_id": "2823009315",
+      "text": "RT @akshay_pachaar: Unlike typical scraping tools, this MCP server dynamically picks the most effective tool based on the structure of the…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846709232042228"
+      ],
+      "created_at": "2025-05-20T15:16:32.000Z",
+      "id": "1924846709232042228",
+      "author_id": "1871934987005546496",
+      "text": "RT @Neuron_World: @coinbase's x402 standard, made it easy for AI agents to purchase services from trusted MCP servers\n\nWith Neuron's upgrad…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846683575419221"
+      ],
+      "created_at": "2025-05-20T15:16:25.000Z",
+      "id": "1924846683575419221",
+      "author_id": "1871934987005546496",
+      "text": "RT @Neuron_World: Excited to demo our recent integration with @hedera HCS-10 and @MoonscapeLabs, enabling Hedera AI agents to buy @SkyX_Net…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846632677277822"
+      ],
+      "created_at": "2025-05-20T15:16:13.000Z",
+      "id": "1924846632677277822",
+      "author_id": "1723999359635709952",
+      "text": "Will be forking this live today.\n\nAnd completely making it for @solana ai.\n\nI will be adding my X402 protocol tech.\n\nAs well as debut $alice token as the payment.\n\nMeaning this will become:\n\n@solana ‘s first monetized MCP server.\n\nPowered by $alice https://t.co/iblYsmzvQc https://t.co/NZqD2ROdIC"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846491509916023"
+      ],
+      "created_at": "2025-05-20T15:15:40.000Z",
+      "id": "1924846491509916023",
+      "author_id": "784008",
+      "text": "@NicerInPerson You can use any MCP server with Amp very easily. MCP support has been in since day 1. The code for Amp is not open source."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846382428418233"
+      ],
+      "created_at": "2025-05-20T15:15:14.000Z",
+      "id": "1924846382428418233",
+      "author_id": "1488285594648203268",
+      "text": "RT @Neuron_World: Excited to demo our recent integration with @hedera HCS-10 and @MoonscapeLabs, enabling Hedera AI agents to buy @SkyX_Net…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846307312861319"
+      ],
+      "created_at": "2025-05-20T15:14:56.000Z",
+      "id": "1924846307312861319",
+      "author_id": "1712659848922587136",
+      "text": "@supabase @tambo_ai connect to the mcp server and register my components like this: https://t.co/Yuml9hjVSX"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846225704071591"
+      ],
+      "created_at": "2025-05-20T15:14:36.000Z",
+      "id": "1924846225704071591",
+      "author_id": "1919376794643218432",
+      "text": "RT @Infoxicador: Don't tell me I didn't tell you\n\nThe Postman API network has 100K+ APIs you can explore and use. \n\nNow we also have an MCP…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924846189217746951"
+      ],
+      "created_at": "2025-05-20T15:14:28.000Z",
+      "id": "1924846189217746951",
+      "author_id": "1767299461561122816",
+      "text": "RT @Neuron_World: Excited to demo our recent integration with @hedera HCS-10 and @MoonscapeLabs, enabling Hedera AI agents to buy @SkyX_Net…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845980064874768"
+      ],
+      "created_at": "2025-05-20T15:13:38.000Z",
+      "id": "1924845980064874768",
+      "author_id": "1712659848922587136",
+      "text": "MCP is changing how I think about building web apps\n\nI made this \"chat with your supabase\" app with almost no custom code\n\n- supabase interaction logic from @supabase's MCP server\n- register react components as UI tools using @tambo_ai \n\nall I had to do was build the components https://t.co/h7PuLhVnWp"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845712849670230"
+      ],
+      "created_at": "2025-05-20T15:12:34.000Z",
+      "id": "1924845712849670230",
+      "author_id": "2193403644",
+      "text": "RT @Hesamation: i actually didn’t know @AnthropicAI and @DeepLearningAI released a free course on MCP:\n&gt; MCP basics and architecture \n&gt; bui…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845619165667487"
+      ],
+      "created_at": "2025-05-20T15:12:12.000Z",
+      "id": "1924845619165667487",
+      "author_id": "1804438951224119297",
+      "text": "RT @bruteforce_code: Update on our Web3 Trust Guard MCP Server! @DeMCP_AI  \n\nI just built a desktop-ready file you can install and run loca…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845521791004709"
+      ],
+      "created_at": "2025-05-20T15:11:48.000Z",
+      "id": "1924845521791004709",
+      "author_id": "344084069",
+      "text": "必然的にMCP Serverがきた。BizApps系の皆さんには大事な内容です。一読くださいませ。\n\nhttps://t.co/HlyXMLYOWd"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845444464521483"
+      ],
+      "created_at": "2025-05-20T15:11:30.000Z",
+      "id": "1924845444464521483",
+      "author_id": "1673427062466527233",
+      "text": "RT @0rdlibrary: Last night I made a @Pontifex @elizaOS agent.\n\nThe holy father will be greeting us in wonderland.\n\nUsing a @Blender &amp; @hype…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845366165348738"
+      ],
+      "created_at": "2025-05-20T15:11:11.000Z",
+      "id": "1924845366165348738",
+      "author_id": "1352277322808881154",
+      "text": "RT @Neuron_World: Excited to demo our recent integration with @hedera HCS-10 and @MoonscapeLabs, enabling Hedera AI agents to buy @SkyX_Net…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845066411012528"
+      ],
+      "created_at": "2025-05-20T15:10:00.000Z",
+      "id": "1924845066411012528",
+      "author_id": "1292624615156658178",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845052192264615"
+      ],
+      "created_at": "2025-05-20T15:09:56.000Z",
+      "id": "1924845052192264615",
+      "author_id": "27875511",
+      "text": "RT @0rdlibrary: Last night I made a @Pontifex @elizaOS agent.\n\nThe holy father will be greeting us in wonderland.\n\nUsing a @Blender &amp; @hype…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845015856984538"
+      ],
+      "created_at": "2025-05-20T15:09:48.000Z",
+      "id": "1924845015856984538",
+      "author_id": "1226499420537131008",
+      "text": "@coinbase's x402 standard, made it easy for AI agents to purchase services from trusted MCP servers\n\nWith Neuron's upgrade AI agents can buy services from any MCP server. Because of our validator network, no trust is needed, and all purchases are protected with guarantees 🚀"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924845013747245503"
+      ],
+      "created_at": "2025-05-20T15:09:47.000Z",
+      "id": "1924845013747245503",
+      "author_id": "1226499420537131008",
+      "text": "Excited to demo our recent integration with @hedera HCS-10 and @MoonscapeLabs, enabling Hedera AI agents to buy @SkyX_Network  weather data via their MCP server with just a wallet and some @USDC https://t.co/gRJx51vthx"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924844765066969364"
+      ],
+      "created_at": "2025-05-20T15:08:48.000Z",
+      "id": "1924844765066969364",
+      "author_id": "9494442",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924844691125895429"
+      ],
+      "created_at": "2025-05-20T15:08:30.000Z",
+      "id": "1924844691125895429",
+      "author_id": "18473212",
+      "text": "RT @jasonzhou1993: MCP clearly has demand,\nBut monetizing it has been tricky.\n\nI figured out the easiest way to build &amp; monetize a Paid MCP…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924844646213308916"
+      ],
+      "created_at": "2025-05-20T15:08:20.000Z",
+      "id": "1924844646213308916",
+      "author_id": "18473212",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924844394269511932"
+      ],
+      "created_at": "2025-05-20T15:07:20.000Z",
+      "id": "1924844394269511932",
+      "author_id": "1850871667758678016",
+      "text": "RT @0rdlibrary: Last night I made a @Pontifex @elizaOS agent.\n\nThe holy father will be greeting us in wonderland.\n\nUsing a @Blender &amp; @hype…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924844044217164119"
+      ],
+      "created_at": "2025-05-20T15:05:56.000Z",
+      "id": "1924844044217164119",
+      "author_id": "1740767181321777152",
+      "text": "RT @0rdlibrary: Last night I made a @Pontifex @elizaOS agent.\n\nThe holy father will be greeting us in wonderland.\n\nUsing a @Blender &amp; @hype…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843961333547347"
+      ],
+      "created_at": "2025-05-20T15:05:36.000Z",
+      "id": "1924843961333547347",
+      "author_id": "3028198667",
+      "text": "RT @JulianGoldieSEO: Mind-blowing AI capability you didn't know existed.\n\n→ Install browser extension\n→ Configure MCP server\n→ Connect Clau…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843953242661002"
+      ],
+      "created_at": "2025-05-20T15:05:34.000Z",
+      "id": "1924843953242661002",
+      "author_id": "1801900061946757120",
+      "text": "RT @0rdlibrary: Last night I made a @Pontifex @elizaOS agent.\n\nThe holy father will be greeting us in wonderland.\n\nUsing a @Blender &amp; @hype…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843853200449692"
+      ],
+      "created_at": "2025-05-20T15:05:11.000Z",
+      "id": "1924843853200449692",
+      "author_id": "1861019668187959296",
+      "text": "RT @koki_develop: おお、公式から Terraform の MCP サーバー出た\n\nhttps://t.co/11cQHP3xOZ"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843835139514680"
+      ],
+      "created_at": "2025-05-20T15:05:06.000Z",
+      "id": "1924843835139514680",
+      "author_id": "1782866052054999040",
+      "text": "New on the blog! Learn to build a production-ready MCP Server with OAuth &amp; TypeScript. We share our \"battle scars\" so you can avoid making the same mistakes.\n\nhttps://t.co/vYuL9iNiBP\n\n#AI #MCPserver #OAuth #TypeScript #PortalOne #AIAgentCommandCenter"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843824616223207"
+      ],
+      "created_at": "2025-05-20T15:05:04.000Z",
+      "id": "1924843824616223207",
+      "author_id": "314976428",
+      "text": "RT @koki_develop: おお、公式から Terraform の MCP サーバー出た\n\nhttps://t.co/11cQHP3xOZ"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843756651462712"
+      ],
+      "created_at": "2025-05-20T15:04:48.000Z",
+      "id": "1924843756651462712",
+      "author_id": "1723999359635709952",
+      "text": "Last night I made a @Pontifex @elizaOS agent.\n\nThe holy father will be greeting us in wonderland.\n\nUsing a @Blender &amp; @hyperfy_io custom MCP server.\n\nI was able to use my words to craft a world.\n\nToday we bring that world to life.\n\nAnd give $alice holders the key to the kingdom! https://t.co/R0kEbfpoBz"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843713240453140"
+      ],
+      "created_at": "2025-05-20T15:04:37.000Z",
+      "id": "1924843713240453140",
+      "author_id": "1052399447953424386",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843179410653346"
+      ],
+      "created_at": "2025-05-20T15:02:30.000Z",
+      "id": "1924843179410653346",
+      "author_id": "1616472973074128902",
+      "text": "RT @SmartCryptoNew1: 🔒 @QU3ai brings quantum-secure #Web3! Post-quantum crypto, AI, &amp; inter-chain routing for fast, verified compute. \n\n🛡️…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924843084787196324"
+      ],
+      "created_at": "2025-05-20T15:02:07.000Z",
+      "id": "1924843084787196324",
+      "author_id": "1763107658977120256",
+      "text": "RT @SmartCryptoNew1: 🔒 @QU3ai brings quantum-secure #Web3! Post-quantum crypto, AI, &amp; inter-chain routing for fast, verified compute. \n\n🛡️…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924842679265018210"
+      ],
+      "created_at": "2025-05-20T15:00:31.000Z",
+      "id": "1924842679265018210",
+      "author_id": "1371331300951425025",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924842652975214987"
+      ],
+      "created_at": "2025-05-20T15:00:24.000Z",
+      "id": "1924842652975214987",
+      "author_id": "1428596433779773440",
+      "text": "RT @SmartCryptoNew1: 🔒 @QU3ai brings quantum-secure #Web3! Post-quantum crypto, AI, &amp; inter-chain routing for fast, verified compute. \n\n🛡️…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924842615742067181"
+      ],
+      "created_at": "2025-05-20T15:00:16.000Z",
+      "id": "1924842615742067181",
+      "author_id": "2327560616",
+      "text": "Tutorial: Set Up an MCP Server With .NET and @github Copilot https://t.co/wmAPV4TEj1"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924842550986256497"
+      ],
+      "created_at": "2025-05-20T15:00:00.000Z",
+      "id": "1924842550986256497",
+      "author_id": "1405031034",
+      "text": "Mind-blowing AI capability you didn't know existed.\n\n→ Install browser extension\n→ Configure MCP server\n→ Connect Claude to your browser\n→ Give simple commands\n→ Watch AI navigate for you\n\nBookmark this tutorial, it will revolutionize how you interact with AI assistants. 🔮 https://t.co/hIgmbDs5hN"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924842140510912649"
+      ],
+      "created_at": "2025-05-20T14:58:22.000Z",
+      "id": "1924842140510912649",
+      "author_id": "1603793509840035842",
+      "text": "RT @jasonzhou1993: MCP clearly has demand,\nBut monetizing it has been tricky.\n\nI figured out the easiest way to build &amp; monetize a Paid MCP…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924841924214849671"
+      ],
+      "created_at": "2025-05-20T14:57:31.000Z",
+      "id": "1924841924214849671",
+      "author_id": "1922507915837243394",
+      "text": "RT @SmartCryptoNew1: 🔒 @QU3ai brings quantum-secure #Web3! Post-quantum crypto, AI, &amp; inter-chain routing for fast, verified compute. \n\n🛡️…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924841845713957162"
+      ],
+      "created_at": "2025-05-20T14:57:12.000Z",
+      "id": "1924841845713957162",
+      "author_id": "3783740661",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924841486492807548"
+      ],
+      "created_at": "2025-05-20T14:55:46.000Z",
+      "id": "1924841486492807548",
+      "author_id": "1024764652956344320",
+      "text": "RT @svpino: I added a Knowledge Graph to Cursor using MCP.\n\nYou gotta see this working!\n\nKnowledge graphs are a game-changer for AI Agents,…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924841225972285555"
+      ],
+      "created_at": "2025-05-20T14:54:44.000Z",
+      "id": "1924841225972285555",
+      "author_id": "2557044811",
+      "text": "RT @koki_develop: おお、公式から Terraform の MCP サーバー出た\n\nhttps://t.co/11cQHP3xOZ"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924841061672697993"
+      ],
+      "created_at": "2025-05-20T14:54:05.000Z",
+      "id": "1924841061672697993",
+      "author_id": "119784329",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924840432640700663"
+      ],
+      "created_at": "2025-05-20T14:51:35.000Z",
+      "id": "1924840432640700663",
+      "author_id": "1263670045",
+      "text": "RT @jasonzhou1993: MCP clearly has demand,\nBut monetizing it has been tricky.\n\nI figured out the easiest way to build &amp; monetize a Paid MCP…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924840211894108651"
+      ],
+      "created_at": "2025-05-20T14:50:42.000Z",
+      "id": "1924840211894108651",
+      "author_id": "1820644530653179904",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924839924437811443"
+      ],
+      "created_at": "2025-05-20T14:49:34.000Z",
+      "id": "1924839924437811443",
+      "author_id": "1802742075739529216",
+      "text": "RT @SmartCryptoNew1: 🔒 @QU3ai brings quantum-secure #Web3! Post-quantum crypto, AI, &amp; inter-chain routing for fast, verified compute. \n\n🛡️…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924839178405347747"
+      ],
+      "created_at": "2025-05-20T14:46:36.000Z",
+      "id": "1924839178405347747",
+      "author_id": "1252722861002813440",
+      "text": "🔒 @QU3ai brings quantum-secure #Web3! Post-quantum crypto, AI, &amp; inter-chain routing for fast, verified compute. \n\n🛡️ Quantum-Safe MCP Server runs AI models in encrypted enclaves, broadcasting tamper-proof results to any blockchain. \n\n🤖 Confidential, chain-agnostic AI workloads https://t.co/F9shPtEKTO"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924838779397013980"
+      ],
+      "created_at": "2025-05-20T14:45:01.000Z",
+      "id": "1924838779397013980",
+      "author_id": "1418007963864764418",
+      "text": "@VictorTaelin Try o3 in the Deebo debugging MCP server, Victor automates hypothesis generation with a coordinator agent and validates in parallel with ephemeral sub-agents  :) npx deebo-setup@latest. I am a huge fan of my Mac mini and I strongly approve of your cluster btw"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924838683766825304"
+      ],
+      "created_at": "2025-05-20T14:44:38.000Z",
+      "id": "1924838683766825304",
+      "author_id": "1432081444504018950",
+      "text": "RT @_avichawla: An MCP server to create @3blue1brown animations (open-source): https://t.co/gC8o5AWCpw"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924838216617652694"
+      ],
+      "created_at": "2025-05-20T14:42:47.000Z",
+      "id": "1924838216617652694",
+      "author_id": "1418863942714249226",
+      "text": "RT @victor_explore: Add persistent memory to Cursor using MCP and a Knowledge Graph database. This video demonstrates:\n\n- Setting up Neo4j…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924837909204762736"
+      ],
+      "created_at": "2025-05-20T14:41:33.000Z",
+      "id": "1924837909204762736",
+      "author_id": "2382311887",
+      "text": "Hashicorp公式のMCPサーバーがｷﾀ━(ﾟ∀ﾟ)━!\nDocker必須？と思ったらバイナリ実行で動くらしく(*´･ω･`)=3\nさて試さねば\nhttps://t.co/rhGqxSoXqi"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924837369242357894"
+      ],
+      "created_at": "2025-05-20T14:39:25.000Z",
+      "id": "1924837369242357894",
+      "author_id": "1427627565393534978",
+      "text": "RT @QU3ai: QU3’s first 10 days delivered MCP server deployment, 600+ devs onboarded for early-access, 4+ partnerships, and a Top 3 launch o…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924837012575813877"
+      ],
+      "created_at": "2025-05-20T14:38:00.000Z",
+      "id": "1924837012575813877",
+      "author_id": "1848628801301032960",
+      "text": "RT @akshay_pachaar: INCREDIBLE!! An MCP server to browse the web like humans!\n\nBright Data MCP server provides 30+ powerful tools that allo…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924836842202959940"
+      ],
+      "created_at": "2025-05-20T14:37:19.000Z",
+      "id": "1924836842202959940",
+      "author_id": "1751151",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924836831150969101"
+      ],
+      "created_at": "2025-05-20T14:37:16.000Z",
+      "id": "1924836831150969101",
+      "author_id": "68595437",
+      "text": "RT @CloudflareDev: Thinking about building an MCP server? Start here:"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924836535955812617"
+      ],
+      "created_at": "2025-05-20T14:36:06.000Z",
+      "id": "1924836535955812617",
+      "author_id": "300637864",
+      "text": "Thinking about building an MCP server? Start here: https://t.co/j21IahHxx6"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924836430309703697"
+      ],
+      "created_at": "2025-05-20T14:35:41.000Z",
+      "id": "1924836430309703697",
+      "author_id": "1745434382448345089",
+      "text": "➩ Official Links \n\nGet Started ➺ https://t.co/mffhbigXWX\n\nTwitter ➺ https://t.co/4ZgyAVWasX\n\nDiscord ➺ https://t.co/jOS4526elO\n\nDocs ➺ https://t.co/Ib8t9RP53C\n\nGithub ➺ https://t.co/A2cBnZ7PB4"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924836066294481353"
+      ],
+      "created_at": "2025-05-20T14:34:14.000Z",
+      "id": "1924836066294481353",
+      "author_id": "7779052",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924835987404030117"
+      ],
+      "created_at": "2025-05-20T14:33:55.000Z",
+      "id": "1924835987404030117",
+      "author_id": "1364966906923536398",
+      "text": "RT @_avichawla: An MCP server to create @3blue1brown animations (open-source): https://t.co/gC8o5AWCpw"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924835957544743127"
+      ],
+      "created_at": "2025-05-20T14:33:48.000Z",
+      "id": "1924835957544743127",
+      "author_id": "1598291980211175427",
+      "text": "@TeksEdge Me too actually.  I was deep into COM development with MFC and ATL ... That experience is exactly why I'm also all in on the WASM component model.  It's still early for that technology but I've put it to use for my MCP server and I'll be doing the same with agents.  It's secure"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924835914511184010"
+      ],
+      "created_at": "2025-05-20T14:33:38.000Z",
+      "id": "1924835914511184010",
+      "author_id": "23386536",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924834089145925691"
+      ],
+      "created_at": "2025-05-20T14:26:23.000Z",
+      "id": "1924834089145925691",
+      "author_id": "1696951",
+      "text": "RT @browserstack: ⏱️ Tired of wasting hours debugging failed automation tests? That ends today.\n\nIntroducing the latest power-up to Browser…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924833758064345164"
+      ],
+      "created_at": "2025-05-20T14:25:04.000Z",
+      "id": "1924833758064345164",
+      "author_id": "1494158755063537666",
+      "text": "1⃣ Bink MCP is live\n\nA Model Context Protocol (MCP) server implementation for Bink AI, enabling AI agents to interact with blockchain networks and DeFi applications.\n\nhttps://t.co/rsj9zULivD https://t.co/eNbPFoMlIl"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924832577182949511"
+      ],
+      "created_at": "2025-05-20T14:20:22.000Z",
+      "id": "1924832577182949511",
+      "author_id": "905081387589529600",
+      "text": "RT @akshay_pachaar: INCREDIBLE!! An MCP server to browse the web like humans!\n\nBright Data MCP server provides 30+ powerful tools that allo…"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924832554194280560"
+      ],
+      "created_at": "2025-05-20T14:20:17.000Z",
+      "id": "1924832554194280560",
+      "author_id": "574239137",
+      "text": "mcp server、本当は個人的な技量の問題で、Kotlinで書くのが楽なんだけど、使ってもらいやすさのためだけに、nodeで書いている"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "1924832480567165430"
+      ],
+      "created_at": "2025-05-20T14:19:59.000Z",
+      "id": "1924832480567165430",
+      "author_id": "6392872",
+      "text": "RT @iannuttall: my mcp server boilerplate is now free + open source \n(just refunded all orders)\n\n- auth users with google/github\n- host on…"
+    }
+  ],
+  "meta": {
+    "newest_id": "1924847114288296241",
+    "oldest_id": "1924832480567165430",
+    "result_count": 69,
+    "next_token": "b26v89c19zqg8o3fsc27snubldmrhkjt3yuyo5f71qjjx"
+  }
+}

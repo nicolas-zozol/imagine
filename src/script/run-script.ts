@@ -1,8 +1,7 @@
 import './hello-ai.js'
 import dotenv from 'dotenv'
-import { BrowserManager } from '../puppets/browser/index.js'
-import { ActionFactory } from '../puppets/actions/factory.js'
 import fs from 'node:fs/promises'
+import { BrowserManager } from '../puppets/browser/browser-manager.js'
 
 dotenv.config()
 
@@ -16,6 +15,7 @@ async function runScript(script: string, keepOpenFlag = false) {
   const factory = new ActionFactory()
 
   await factory.launch()
+  const context = initContext()
 
   // sequential execution – for-of + await keeps order intact
   for (const rawLine of script.split('\n')) {
@@ -26,10 +26,12 @@ async function runScript(script: string, keepOpenFlag = false) {
 
     const handler = factory.createAction(action)
     console.log('▶', line)
-    await handler.execute(params)
+    const result = await handler.execute(params)
+    console.log('◀', result.value, context.state)
+    context.update(result)
   }
 
-  if (!keepOpenFlag) await browserManager.close()
+  console.log('Script executed, with final context:', context.state)
 }
 
 async function main() {
@@ -37,20 +39,13 @@ async function main() {
 
   // Case A: user passed a filename → treat file content as the script
   if (arg1 && (arg1.endsWith('.txt') || arg1.endsWith('.md'))) {
+    console.log('CASE A !!!Running script from file:', arg1)
     const script = await fs.readFile(arg1, 'utf8')
     const keepOpen = rest.includes('--keep-open')
     await runScript(script, keepOpen)
     return
-  }
-
-  // Case B: fallback to previous single-action mode
-  const { action, params } = parseArgs([arg1, ...rest])
-  const factory = new ActionFactory()
-
-  try {
-    await factory.launch()
-    await factory.createAction(action).execute(params)
-  } finally {
+  } else {
+    throw new Error('Invalid argument. Please provide a valid file name.')
   }
 }
 

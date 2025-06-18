@@ -1,4 +1,24 @@
-import { Config, BrowserConfig } from '../types'
+export interface BrowserConfig {
+  headless: boolean
+  defaultViewport: {
+    width: number
+    height: number
+  }
+  args: string[]
+}
+
+export interface Config {
+  baseUrl: string
+  // selectors: GoogleSelectors;
+  delays: {
+    betweenQueries: number // in milliseconds
+    /* afterCookieConsent: number;*/
+    afterTyping: number
+    smallDelay: number
+    mediumDelay: number
+    largeDelay: number
+  }
+}
 
 export const browserConfig: BrowserConfig = {
   headless: false,
