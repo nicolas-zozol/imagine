@@ -19,22 +19,27 @@
     "reply": "vite-node src/script/reply.ts"
   },
   "dependencies": {
-    "openai": "^4.93.0",
-    "dotenv": "^16.4.7",
-    "puppeteer": "^21.7.0",
-    "@modelcontextprotocol/sdk": "^1.0.0",
-    "zod": "^3.22.4",
+    "@google/genai": "^1.4.0",
     "@masala/parser": "^2.0.0-alpha.5",
-    "@google/genai" : "^1.4.0",
-    "tingodb": "^0.6.1"
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.4.7",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.0",
+    "openai": "^4.93.0",
+    "puppeteer": "^21.7.0",
+    "tingodb": "^0.6.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "vite-node": "^3.1.1",
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^20.19.1",
     "@types/puppeteer": "^7.0.4",
+    "mongodb-memory-server": "^10.1.4",
     "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.4",
-    "vitest": "^3.1.4"
+    "typescript": "^5.8.3",
+    "vite-node": "^3.1.1",
+    "vitest": "^3.2.4"
   }
 }

@@ -12,6 +12,8 @@ function parseLine(line: string): { action: string; params: string[] } {
 
 async function runScript(script: string, keepOpenFlag = false) {
   const browserManager = new BrowserManager()
+
+  /* Deprecated script execution because of new DSL and interpreter
   const factory = new ActionFactory()
 
   await factory.launch()
@@ -30,8 +32,10 @@ async function runScript(script: string, keepOpenFlag = false) {
     console.log('◀', result.value, context.state)
     context.update(result)
   }
+  
+   */
 
-  console.log('Script executed, with final context:', context.state)
+  console.log('Script Deprecated')
 }
 
 async function main() {

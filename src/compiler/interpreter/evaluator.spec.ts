@@ -27,6 +27,8 @@ const baseContext: ExecutionContext = {
     id: 'john@doe.com',
     extra: {},
   },
+  store: {},
+  prompts: [],
 }
 
 describe('ExpressionEvaluator', () => {
