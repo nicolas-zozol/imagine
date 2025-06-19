@@ -8,7 +8,7 @@ export interface Timeable {
 }
 
 export interface UserDto extends Timeable {
-  id: string
+  readonly id: string
   email: string
   image?: string
   memberCreated: boolean // controls if the related member Object is made

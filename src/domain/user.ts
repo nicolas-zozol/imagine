@@ -45,7 +45,7 @@ export abstract class BaseTimeable implements Timeable {
 /**
  * Concrete implementation of the `User` domain object.
  */
-export class UserEntity extends BaseTimeable implements UserDto {
+export class User extends BaseTimeable implements UserDto {
   id: string
   email: string
   image?: string
@@ -86,7 +86,7 @@ export class UserEntity extends BaseTimeable implements UserDto {
 /**
  * Concrete implementation of the `Team` domain object.
  */
-export class TeamEntity extends BaseTimeable implements TeamDto {
+export class Team extends BaseTimeable implements TeamDto {
   id: string
   name: string
 
@@ -108,10 +108,7 @@ export class TeamEntity extends BaseTimeable implements TeamDto {
 /**
  * Concrete implementation of the `Organization` domain object.
  */
-export class OrganizationEntity
-  extends BaseTimeable
-  implements OrganizationDto
-{
+export class Organization extends BaseTimeable implements OrganizationDto {
   users: UserDto[]
 
   constructor({ users = [] }: Partial<OrganizationDto> = {}) {
@@ -144,7 +141,7 @@ export class OrganizationEntity
  * Minimal wrapper class for a paying member. It delegates
  * most state checks to the underlying `User` instance.
  */
-export class MemberEntity implements MemberDto {
+export class Member implements MemberDto {
   user: UserDto
 
   constructor(user: UserDto) {
