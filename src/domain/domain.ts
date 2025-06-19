@@ -7,7 +7,7 @@ export interface Timeable {
   archivedAt?: Date
 }
 
-export interface User extends Timeable {
+export interface UserDto extends Timeable {
   id: string
   email: string
   image?: string
@@ -15,25 +15,25 @@ export interface User extends Timeable {
   status: 'registered' | 'member' | 'pro' | 'archived'
 }
 
-export interface Team extends Timeable {
+export interface TeamDto extends Timeable {
   id: string
   name: string
 }
 
 // Someone who currently pays
-export interface Member {
-  user: User
+export interface MemberDto {
+  user: UserDto
 }
 
-export interface Organization extends Timeable {
-  users: User[]
+export interface OrganizationDto extends Timeable {
+  users: UserDto[]
 }
 
-export interface IFlow extends Timeable {
+export interface FlowDto extends Timeable {
   id: string
   name: string
-  team: Team | undefined
-  owner: User
+  team: TeamDto | undefined
+  owner: UserDto
   description: string
   state: 'draft' | 'active' | 'archived'
   context: ExecutionContext

@@ -14,6 +14,8 @@ export interface ExecutionContext {
     id: string
     extra: Serializable
   }
+  store: Serializable
+  prompts: string[]
 }
 
 export interface StatementLog {
@@ -41,5 +43,7 @@ export function createExecutionContext(
       id: userId,
       extra: {},
     },
+    store: {},
+    prompts: [],
   }
 }

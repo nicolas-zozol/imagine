@@ -8,7 +8,13 @@
 // Import your interfaces; adjust the path as needed for your project structure.
 // import type { Timeable, User, Team, Organization, Member } from "./domain-interfaces";
 
-import { Member, Organization, Team, Timeable, User } from './domain.js'
+import {
+  MemberDto,
+  OrganizationDto,
+  TeamDto,
+  Timeable,
+  UserDto,
+} from './domain.js'
 
 /** Basic implementation of the Timeable interface. */
 export abstract class BaseTimeable implements Timeable {
@@ -39,7 +45,7 @@ export abstract class BaseTimeable implements Timeable {
 /**
  * Concrete implementation of the `User` domain object.
  */
-export class UserEntity extends BaseTimeable implements User {
+export class UserEntity extends BaseTimeable implements UserDto {
   id: string
   email: string
   image?: string
@@ -52,7 +58,7 @@ export class UserEntity extends BaseTimeable implements User {
     image,
     memberCreated = false,
     status = 'registered',
-  }: Omit<User, 'createdAt' | 'updatedAt' | 'archivedAt'>) {
+  }: Omit<UserDto, 'createdAt' | 'updatedAt' | 'archivedAt'>) {
     super()
     this.id = id
     this.email = email
@@ -80,14 +86,14 @@ export class UserEntity extends BaseTimeable implements User {
 /**
  * Concrete implementation of the `Team` domain object.
  */
-export class TeamEntity extends BaseTimeable implements Team {
+export class TeamEntity extends BaseTimeable implements TeamDto {
   id: string
   name: string
 
   constructor({
     id,
     name,
-  }: Omit<Team, 'createdAt' | 'updatedAt' | 'archivedAt'>) {
+  }: Omit<TeamDto, 'createdAt' | 'updatedAt' | 'archivedAt'>) {
     super()
     this.id = id
     this.name = name
@@ -102,20 +108,23 @@ export class TeamEntity extends BaseTimeable implements Team {
 /**
  * Concrete implementation of the `Organization` domain object.
  */
-export class OrganizationEntity extends BaseTimeable implements Organization {
-  users: User[]
+export class OrganizationEntity
+  extends BaseTimeable
+  implements OrganizationDto
+{
+  users: UserDto[]
 
-  constructor({ users = [] }: Partial<Organization> = {}) {
+  constructor({ users = [] }: Partial<OrganizationDto> = {}) {
     super()
     this.users = users
   }
 
-  hasUser(user: string | User): boolean {
+  hasUser(user: string | UserDto): boolean {
     const userId = typeof user === 'string' ? user : user.id
     return this.users.some((u) => u.id === userId)
   }
 
-  addUser(user: User) {
+  addUser(user: UserDto) {
     if (!this.hasUser(user)) {
       this.users.push(user)
       this.touch()
@@ -123,7 +132,7 @@ export class OrganizationEntity extends BaseTimeable implements Organization {
   }
 
   removeUser(userId: string) {
-    const idx = this.users.findIndex((u: User) => u.id === userId)
+    const idx = this.users.findIndex((u: UserDto) => u.id === userId)
     if (idx > -1) {
       this.users.splice(idx, 1)
       this.touch()
@@ -135,10 +144,10 @@ export class OrganizationEntity extends BaseTimeable implements Organization {
  * Minimal wrapper class for a paying member. It delegates
  * most state checks to the underlying `User` instance.
  */
-export class MemberEntity implements Member {
-  user: User
+export class MemberEntity implements MemberDto {
+  user: UserDto
 
-  constructor(user: User) {
+  constructor(user: UserDto) {
     this.user = user
   }
 

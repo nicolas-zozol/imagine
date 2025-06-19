@@ -33,6 +33,8 @@ describe('StatementExecutor with parsed statement', () => {
       id: 'user-123',
       extra: {},
     },
+    store: {},
+    prompts: [],
   }
 
   it('should evaluate literal input and store in output', async () => {
